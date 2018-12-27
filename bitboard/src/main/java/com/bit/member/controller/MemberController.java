@@ -12,7 +12,8 @@ import com.bit.member.service.MemberService;
 public class MemberController {
 	
 	@Autowired
-	private MemberService memberService;
+	MemberService memberService;
+	
 	  
 	@RequestMapping("select")
 	public String selectMember(Model model) {
