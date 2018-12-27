@@ -24,8 +24,11 @@
 	  <property name="dataSource" ref="ds"/>
 	  <property name="configLocation" value="classpath:com/bit/config/mybatis/configuration.xml"/>
 	  <property name="mapperLocations">
+	  
 	    <list>
+	    <value>classpath:com/bit/config/mybatis/member.xml</value>
 	    </list>
+	    
 	  </property>
 	</bean>
 	

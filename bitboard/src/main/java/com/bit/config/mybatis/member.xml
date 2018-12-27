@@ -4,4 +4,16 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bit.member.dao.MemberDao">
   
+  <select id="infoMember" parameterType="String" resultType="memberDto">
+    select * from member where id = #{id}
+  
+  </select>
+  
+  <select id="selectMember" resultType="memberDto">
+    select * from member
+  
+  
+  </select>
+  
+  
 </mapper>

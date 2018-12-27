@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -106,21 +107,21 @@
                     <tbody>
                     <tr>
                         <th class="text-center">ID</th>
-                        <td id="id" class="text-left">gglim</td>
+                        <td id="id" class="text-left">${info.id }</td>
                         <th class="text-center">회원명</th>
-                        <td id="name" class="text-left">임경균</td>
+                        <td id="name" class="text-left">${info.nm }</td>
                     </tr>
                     <tr>
                         <th class="text-center">생년월일</th>
-                        <td id="birth" class="text-left">2014.02.19</td>
+                        <td id="birth" class="text-left">${info.birth}</td>
                         <th class="text-center">성별</th>
-                        <td id="gender" class="text-left">남</td>
+                        <td id="gender" class="text-left">${info.gender}</td>
                     </tr>
                     <tr>
                         <th class="text-center">전화번호</th>
-                        <td id="phone" class="text-left">010-0000-0000</td>
+                        <td id="phone" class="text-left">${info.phone}</td>
                         <th class="text-center">주소</th>
-                        <td id="addr" class="text-left">서울시 금천구 가산동</td>
+                        <td id="addr" class="text-left">${info.addr}</td>
                     </tr>
                     </tbody>
                 </table>

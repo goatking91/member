@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -96,14 +97,18 @@
                             </tr>
                             </thead>
                             <tbody>
+                            
                             <!--<tr><td colspan="5" class="text-center">가입한 회원이 없습니다.</td></tr>-->
+                            <c:forEach var="list" items="${list }" >
+                            
                             <tr>
-                                <td class="text-center">1</td>
-                                <td>gglim</td>
-                                <td><a href="./view.html">임경균</a></td>
-                                <td>010-0000-0000</td>
-                                <td>2004/02/18</td>
+                                <td class="text-center">${list.seq}</td>
+                                <td>${list.id }</td>
+                                <td><a href="${pageContext.request.contextPath}/member/info?id=${list.id }">${list.nm }</a></td>
+                                <td>${list. phone }</td>
+                                <td>${list.addrcode }</td>
                             </tr>
+                            </c:forEach>
                             </tbody>
                         </table>
                     </div>
