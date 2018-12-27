@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BitCamp</title>
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/bootswatch.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/bootswatch.min.css" rel="stylesheet">
     <style type="text/css">
         body {
             padding-top: 100px;
@@ -77,7 +77,7 @@
     </div>
 
     <!-- form -->
-    <form class="form-signin" action="./list.html">
+    <form class="form-signin" action="member/list" method="get">
         <input type="text" class="form-control" id="inputEmail" placeholder="아이디">
         <input type="password" class="form-control" id="inputPassword" placeholder="비밀번호">
        
@@ -93,8 +93,8 @@
     </div>
 </div>
 
-<script src="js/jquery-2.1.0.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/bootswatch.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-2.1.0.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootswatch.js"></script>
 </body>
 </html>

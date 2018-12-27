@@ -17,10 +17,10 @@ public class MemberController {
 	MemberService memberService;
 	
 	  
-	@RequestMapping("select")
+	@RequestMapping(value="list",method=RequestMethod.GET)
 	public String selectMember(Model model) {
 	    
-		return "";
+		return "list";
 	  }
 	
 	@RequestMapping("info")
