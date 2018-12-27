@@ -358,3 +358,30 @@ ALTER TABLE BBS
 		REFERENCES BOARD ( -- 게시판
 			SEQ -- 글번호
 		);
+
+-- 회원
+DROP TABLE IF EXISTS MEMBER RESTRICT;
+
+-- 회원
+CREATE TABLE MEMBER (
+	SEQ      INT         NOT NULL COMMENT '회원번호', -- 회원번호
+	ID       VARCHAR(30) NULL     COMMENT '아이디', -- 아이디
+	NM       VARCHAR(10) NULL     COMMENT '이름', -- 이름
+	PASSWORD VARCHAR(20) NULL     COMMENT '비밀번호', -- 비밀번호
+	BIRTH    CHAR(10)    NULL     COMMENT '생일', -- 생일
+	GENDER   INT(1)      NULL     COMMENT '성별', -- 성별
+	PHONE    VARCHAR(13) NULL     COMMENT '전화번호', -- 전화번호
+	ADDRCODE VARCHAR(7)  NULL     COMMENT '우편번호', -- 우편번호
+	ADDR     LONGTEXT    NULL     COMMENT '주소' -- 주소
+)
+COMMENT '회원';
+
+-- 회원
+ALTER TABLE MEMBER
+	ADD CONSTRAINT PK_MEMBER -- 회원 기본키
+		PRIMARY KEY (
+			SEQ -- 회원번호
+		);
+
+ALTER TABLE MEMBER
+	MODIFY COLUMN SEQ INT NOT NULL AUTO_INCREMENT COMMENT '회원번호';
