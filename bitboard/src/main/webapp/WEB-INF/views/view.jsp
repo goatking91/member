@@ -10,6 +10,9 @@
     <title>BitCamp</title>
     <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/bootswatch.min.css" rel="stylesheet">
+    <script src="${pageContext.request.contextPath}/js/jquery-2.1.0.js"></script>
+		<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+		<script src="${pageContext.request.contextPath}/js/bootswatch.js"></script>
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -34,8 +37,10 @@
 // 						success : function(data){	
 // 						}
 // 					})
-		location.href='member/update';		
-		})	
+    $('#update').click(function(){
+      location.href='${pageContext.request.contextPath}/member/update?id=${info.id }';
+    });
+	});
 	
 
 </script>
@@ -115,7 +120,10 @@
                         <th class="text-center">생년월일</th>
                         <td id="birth" class="text-left">${info.birth}</td>
                         <th class="text-center">성별</th>
-                        <td id="gender" class="text-left">${info.gender}</td>
+                        <td id="gender" class="text-left">
+                        <c:if test="${info.gender eq 0}">남자</c:if>
+                        <c:if test="${info.gender eq 1}">여자</c:if>
+                        </td>
                     </tr>
                     <tr>
                         <th class="text-center">전화번호</th>
@@ -131,7 +139,7 @@
             <div class="pull-right">
             	  <!--button class="btn btn-success">수정</button-->
                 <button id="update" class="btn btn-success btn-default">수정</button>
-                <a href="#" class="btn btn-large btn-default">삭제</a>
+                <a href="${pageContext.request.contextPath }/member/delete?id=${info.id}" class="btn btn-large btn-default">삭제</a>
                 <a href="./list.html" class="btn btn-large btn-default">목록</a>
             </div>
 
@@ -154,10 +162,5 @@
         </div>
     </footer>
 </div>
-
-
-<script src="${pageContext.request.contextPath}/js/jquery-2.1.0.js"></script>
-<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/bootswatch.js"></script>
 </body>
 </html>

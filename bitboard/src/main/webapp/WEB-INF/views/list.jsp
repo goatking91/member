@@ -104,7 +104,7 @@
                             <tr>
                                 <td class="text-center">${list.seq}</td>
                                 <td>${list.id }</td>
-                                <td><a href="${pageContext.request.contextPath}/member/info?id=${list.id }">${list.nm }</a></td>
+                                <td><a href="${pageContext.request.contextPath}/member/view?id=${list.id }">${list.nm }</a></td>
                                 <td>${list. phone }</td>
                                 <td>${list.addrcode }</td>
                             </tr>

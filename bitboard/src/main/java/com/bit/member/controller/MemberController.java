@@ -25,28 +25,40 @@ public class MemberController {
 
   @RequestMapping(value="view", method = RequestMethod.GET)
   public String infoMember(@RequestParam String id, Model model) {
-    model.addAttribute("info",memberService.infoMember(id));
 
+    model.addAttribute("info", memberService.infoMember(id));
     return "view";
+  }
+
+  @RequestMapping(value="insert",method=RequestMethod.GET)
+  public String insert() {
+
+    return "join";
   }
 
   @RequestMapping(value = "insert", method = RequestMethod.POST)
   public String insertMember(MemberDto memberDto, Model model) {
-    System.out.println(memberDto.toString());
-    memberService.insertMember(memberDto);
 
+    memberService.insertMember(memberDto);
     return "redirect:/index.jsp";
   }
 
   @RequestMapping(value = "update", method = RequestMethod.GET)
-  public String update() {
+  public String update(String id, Model model) {
 
+    model.addAttribute("info", memberService.infoMember(id));
     return "modify";
   }
 
-  @RequestMapping("delete")
-  public String deleteMember() {
+  @RequestMapping(value = "update", method = RequestMethod.POST)
+  public String update(MemberDto memberDto) {
+    memberService.updateMember(memberDto);
+    return "redirect:/member/list";
+  }
 
-    return "";
+  @RequestMapping(value = "delete", method = RequestMethod.GET)
+  public String deleteMember(String id) {
+    memberService.deleteMember(id);
+    return "redirect:/member/list";
   }
 }

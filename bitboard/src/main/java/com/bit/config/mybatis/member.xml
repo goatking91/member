@@ -3,17 +3,32 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bit.member.dao.MemberDao">
-  
-  <select id="infoMember" parameterType="String" resultType="memberDto">
-    select * from member where id = #{id}
-  
-  </select>
-  
-  <select id="selectMember" resultType="memberDto">
-    select * from member
-  
-  
-  </select>
-  
-  
+
+	<insert id="insertMember" parameterType="memberDto">
+		insert into member (id, nm, password, birth, gender, phone, addrcode, addr)
+		values (#{id}, #{nm}, #{password}, #{birth}, #{gender}, #{phone}, #{addrcode}, #{addr})
+	</insert>
+
+
+	<select id="infoMember" parameterType="String" resultType="memberDto">
+		select * from member where id = #{id}
+	</select>
+
+	<select id="selectMember" resultType="memberDto">
+		select * from member
+	</select>
+
+	<update id="updateMember" parameterType="memberDto">
+		update member
+		set nm = #{nm}, birth = #{birth}, gender=#{gender}, phone=#{phone},
+		addr = #{addr}
+		where id = #{id}
+	</update>
+
+	<delete id="deleteMember">
+		delete
+		from member
+		where id = #{id}
+	</delete>
+
 </mapper>

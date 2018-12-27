@@ -22,25 +22,27 @@ public class MemberServiceImpl implements MemberService {
 
   @Override
   public MemberDto infoMember(String id) {
+    
     return sqlSession.getMapper(MemberDao.class).infoMember(id);
   }
 
   @Override
   public void insertMember(MemberDto memberDto) {
+    
     sqlSession.getMapper(MemberDao.class).insertMember(memberDto);
 
   }
 
   @Override
   public void updateMember(MemberDto memberDto) {
-    // TODO Auto-generated method stub
-
+    
+    sqlSession.getMapper(MemberDao.class).updateMember(memberDto);
   }
 
   @Override
   public void deleteMember(String id) {
-    // TODO Auto-generated method stub
 
+    sqlSession.getMapper(MemberDao.class).deleteMember(id);
   }
 
 }

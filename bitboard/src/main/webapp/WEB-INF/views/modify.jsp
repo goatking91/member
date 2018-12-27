@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -22,10 +23,11 @@
 <script type="text/javascript">
  $(document).ready(function(){
 	$('#save').click(function(){
-		alert("되네");
-	})
+		var form = $('#updateForm').attr("method", "post").attr("action", "${pageContext.request.contextPath}/member/update");
+		form.submit();
+	});
 	 
- })
+ });
 
 </script>
 
@@ -81,59 +83,76 @@
 					<h3>회원정보</h3>
 				</div>
 
-
-				<div class="table-responsive">
-					<table class="table table-bordered">
-						<colgroup>
-							<col width="120">
-							<col width="*">
-							<col width="120">
-							<col width="*">
-						</colgroup>
-						<tbody>
-							<tr>
-								<th class="text-center">ID</th>
-								<td class="text-left"><input type="text"
-									class="form-control" id="id" placeholder="아이디" value="gglim"
-									readonly></td>
-								<th class="text-center">회원명</th>
-								<td class="text-left"><input type="text"
-									class="form-control" id="name" placeholder="이름" value="임경균">
-								</td>
-							</tr>
-							<tr>
-								<th class="text-center">생년월일</th>
-								<td class="text-left"><input type="text"
-									class="form-control" id="birth" placeholder="생일"
-									value="2014.02.19"></td>
-								<th class="text-center">성별</th>
-								<td class="text-left">
-									<div class="radio">
-										<label> <input type="radio" name="optionsRadios"
-											id="optionsRadios1" value="option1" checked=""> 남자
-										</label>
-									</div>
-									<div class="radio">
-										<label> <input type="radio" name="optionsRadios"
-											id="optionsRadios2" value="option2"> 여자
-										</label>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<th class="text-center">전화번호</th>
-								<td class="text-left"><input type="text"
-									class="form-control" placeholder="이름" value="010-0000-00000">
-								</td>
-								<th class="text-center">주소</th>
-								<td class="text-left"><input type="text"
-									class="form-control" placeholder="이름" value="서울시 금천구 가산동">
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-
+        <form id="updateForm" >
+					<div class="table-responsive">
+						<table class="table table-bordered">
+							<colgroup>
+								<col width="120">
+								<col width="*">
+								<col width="120">
+								<col width="*">
+							</colgroup>
+							<tbody>
+								<tr>
+									<th class="text-center">ID</th>
+									<td class="text-left"><input type="text" name="id"
+										class="form-control" id="id" placeholder="아이디" value="${info.id }"
+										readonly></td>
+									<th class="text-center">회원명</th>
+									<td class="text-left"><input type="text" name="nm"
+										class="form-control" id="name" placeholder="이름" value="${info.nm }">
+									</td>
+								</tr>
+								<tr>
+									<th class="text-center">생년월일</th>
+									<td class="text-left"><input type="text" name="birth"
+										class="form-control" id="birth" placeholder="생일"
+										value="${info.birth }"></td>
+									<th class="text-center">성별</th>
+									<td class="text-left">
+									  <c:choose>
+									    <c:when test="${info.gender eq 0 }">
+									      <div class="radio">
+	                        <label> <input type="radio" name="gender"
+	                          id="optionsRadios1" value="0" checked="checked"> 남자
+	                        </label>
+	                      </div>
+	                      <div class="radio">
+	                        <label> <input type="radio" name="gender"
+	                          id="optionsRadios2" value="1"> 여자
+	                        </label>
+	                      </div>
+									    </c:when>
+									    <c:otherwise>
+									      <div class="radio">
+	                        <label> <input type="radio" name="gender"
+	                          id="optionsRadios1" value="0"> 남자
+	                        </label>
+	                      </div>
+	                      <div class="radio">
+	                        <label> <input type="radio" name="gender"
+	                          id="optionsRadios2" value="1" checked="checked"> 여자
+	                        </label>
+	                      </div>
+									    </c:otherwise>
+	                  </c:choose>
+									</td>
+								</tr>
+								<tr>
+									<th class="text-center">전화번호</th>
+									<td class="text-left"><input type="text" id="phone" name="phone"
+										class="form-control" placeholder="이름" value="${info.phone }">
+									</td>
+									<th class="text-center">주소</th>
+									<td class="text-left"><input type="text" id="addr" name="addr"
+										class="form-control" placeholder="이름" value="${info.addr }">
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</form>
+        
 
 				<div class="pull-right">
 					<button type="button" id="save" class="btn btn-success btn-default">저장</button>
