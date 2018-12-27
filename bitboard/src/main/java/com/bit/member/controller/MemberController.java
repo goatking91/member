@@ -18,35 +18,30 @@ public class MemberController {
 
   @RequestMapping(value="list",method=RequestMethod.GET)
   public String selectMember(Model model) {
-    
+
     model.addAttribute("list", memberService.selectMember() );
     return "list";
   }
 
-  @RequestMapping("info")
+  @RequestMapping(value="view", method = RequestMethod.GET)
   public String infoMember(@RequestParam String id, Model model) {
     model.addAttribute("info",memberService.infoMember(id));
-
 
     return "view";
   }
 
-  @RequestMapping("insert")
-  public String insertMember(MemberDto memberDto,Model model) {
+  @RequestMapping(value = "insert", method = RequestMethod.POST)
+  public String insertMember(MemberDto memberDto, Model model) {
+    System.out.println(memberDto.toString());
+    memberService.insertMember(memberDto);
 
-    return "";
+    return "redirect:/index.jsp";
   }
 
-  @RequestMapping(value="update",method=RequestMethod.GET)
+  @RequestMapping(value = "update", method = RequestMethod.GET)
   public String update() {
 
     return "modify";
-  }
-
-  @RequestMapping(value="update",method=RequestMethod.POST)
-  public String updateMember(MemberDto memberDto,Model model) {
-
-    return "";
   }
 
   @RequestMapping("delete")
