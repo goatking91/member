@@ -3,10 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bit.member.dao.MemberDao">
-  	<insert id="insertMember" parameterType="memberDto">
-  		insert into member
-  		(id,nm,password,birth,gender,phone,addrcode,addr)
-  		values (#{id},#{nm},#{password},#{birth},#{gender},
-  		#{phone},#{addrcode},#{addr})
-  	</insert>
+	<insert id="insertMember" parameterType="memberDto">
+		insert into member
+		(id,nm,password,birth,gender,phone,addrcode,addr)
+		values (#{id},#{nm},#{password},#{birth},#{gender},
+		#{phone},#{addrcode},#{addr})
+	</insert>
 </mapper>
