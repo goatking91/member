@@ -1,9 +1,9 @@
-package com.bit.member.service;
+package com.bit.member.dao;
 
 import java.util.List;
 import com.bit.member.model.MemberDto;
 
-public interface MemberService {
+public interface MemberDao {
   
   List<MemberDto> selectMember();
   MemberDto infoMember(String id);

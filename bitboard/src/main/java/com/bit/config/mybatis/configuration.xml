@@ -6,7 +6,7 @@
 <configuration>
 
   <typeAliases>
-    
+    <typeAlias type="com.bit.member.model.MemberDto" alias="memberDto"/>
   </typeAliases>
 
 </configuration>
