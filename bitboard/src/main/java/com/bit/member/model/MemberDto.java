@@ -1,6 +1,11 @@
 package com.bit.member.model;
 
 public class MemberDto {
+	@Override
+	public String toString() {
+		return "MemberDto [seq=" + seq + ", id=" + id + ", nm=" + nm + ", password=" + password + ", birth=" + birth
+				+ ", gender=" + gender + ", phone=" + phone + ", addrcode=" + addrcode + ", addr=" + addr + "]";
+	}
 	int seq;
 	String id;
 	String nm;

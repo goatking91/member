@@ -13,7 +13,20 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+<script src="${pageContext.request.contextPath}/js/jquery-2.1.0.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootswatch.js"></script>
 </head>
+<script type="text/javascript">
+ $(document).ready(function(){
+	$('#save').click(function(){
+		alert("되네");
+	})
+	 
+ })
+
+</script>
+
 <body>
 
 <!-- Main Navigation ========================================================================================== -->
@@ -83,17 +96,17 @@
                     <tr>
                         <th class="text-center">ID</th>
                         <td class="text-left">
-                        	<input type="text" class="form-control" placeholder="아이디" value="gglim" readonly>
+                        	<input type="text" class="form-control" id="id" placeholder="아이디" value="gglim" readonly>
                         </td>
                         <th class="text-center">회원명</th>
                         <td class="text-left">
-                        	<input type="text" class="form-control" placeholder="이름" value="임경균">
+                        	<input type="text" class="form-control" id="name" placeholder="이름" value="임경균">
                         </td>
                     </tr>
                     <tr>
                         <th class="text-center">생년월일</th>
                         <td class="text-left">                        
-                        	<input type="text" class="form-control" placeholder="이름" value="2014.02.19">                       	
+                        	<input type="text" class="form-control" id="birth" placeholder="생일" value="2014.02.19">                       	
                         </td>
                         <th class="text-center">성별</th>
                         <td class="text-left">
@@ -127,7 +140,7 @@
 
             
             <div class="pull-right">
-                <a href="#" class="btn btn-success btn-default">저장</a>
+                <button type="button" id="save" class="btn btn-success btn-default">저장</button>
                 <a href="./list.html" class="btn btn-large btn-default">목록</a>
             </div>
 
@@ -151,9 +164,5 @@
     </footer>
 </div>
 
-
-<script src="${pageContext.request.contextPath}/js/jquery-2.1.0.js"></script>
-<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/bootswatch.js"></script>
 </body>
 </html>

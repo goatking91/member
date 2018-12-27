@@ -15,7 +15,6 @@
     <![endif]-->
 </head>
 <script type="text/javascript">
-	$(document).ready(function(){
 // 		$('#update').click(function(){
 // 			var allData = {'id':$('#id').val(),
 // 						   'nm':$('#name').val(),
@@ -33,9 +32,7 @@
 // 						success : function(data){	
 // 						}
 // 					})
-		location.href='member/update';		
-		})	
-	
+
 
 </script>
 <body>
@@ -106,21 +103,21 @@
                     <tbody>
                     <tr>
                         <th class="text-center">ID</th>
-                        <td id="id" class="text-left">gglim</td>
+                        <td class="text-left">gglim</td>
                         <th class="text-center">회원명</th>
-                        <td id="name" class="text-left">임경균</td>
+                        <td class="text-left">임경균</td>
                     </tr>
                     <tr>
                         <th class="text-center">생년월일</th>
-                        <td id="birth" class="text-left">2014.02.19</td>
+                        <td class="text-left">2014.02.19</td>
                         <th class="text-center">성별</th>
-                        <td id="gender" class="text-left">남</td>
+                        <td class="text-left">남</td>
                     </tr>
                     <tr>
                         <th class="text-center">전화번호</th>
-                        <td id="phone" class="text-left">010-0000-0000</td>
+                        <td class="text-left">010-0000-0000</td>
                         <th class="text-center">주소</th>
-                        <td id="addr" class="text-left">서울시 금천구 가산동</td>
+                        <td class="text-left">서울시 금천구 가산동</td>
                     </tr>
                     </tbody>
                 </table>
@@ -129,7 +126,7 @@
             
             <div class="pull-right">
             	  <!--button class="btn btn-success">수정</button-->
-                <button id="update" class="btn btn-success btn-default">수정</button>
+                <a href="${pageContext.request.contextPath}/member/update?id=${id}" class="btn btn-success btn-default">수정</a>
                 <a href="#" class="btn btn-large btn-default">삭제</a>
                 <a href="./list.html" class="btn btn-large btn-default">목록</a>
             </div>

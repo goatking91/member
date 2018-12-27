@@ -100,7 +100,7 @@
                             <tr>
                                 <td class="text-center">1</td>
                                 <td>gglim</td>
-                                <td><a href="./view.html">임경균</a></td>
+                                <td><a href="${pageContext.request.contextPath}/member/view">임경균</a></td>
                                 <td>010-0000-0000</td>
                                 <td>2004/02/18</td>
                             </tr>

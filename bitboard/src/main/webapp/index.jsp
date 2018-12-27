@@ -83,7 +83,7 @@
        
         <div class="row form-btn">
             <button class="btn btn-large btn-warning" type="submit">로그인</button>
-            <a href="" class="btn btn-large btn-default">회원가입</a>
+            <a href="${pageContext.request.contextPath}/member/insert" class="btn btn-large btn-default">회원가입</a>
         </div>
     </form>
 

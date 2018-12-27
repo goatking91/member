@@ -23,18 +23,25 @@ public class MemberController {
 		return "list";
 	  }
 	
-	@RequestMapping("info")
+	@RequestMapping(value="view",method=RequestMethod.GET)
 	public String infoMember(Model model) {
 	    
-		return "";
+		return "view";
 	  }
 	
-	@RequestMapping("insert")
-	public String insertMember(MemberDto memberDto,Model model) {
+	@RequestMapping(value="insert",method=RequestMethod.GET)
+	public String insert() {
 	    
-		return "";
+		return "join";
 	  }
-
+	@RequestMapping(value="insert",method=RequestMethod.POST)
+	public String insertMember(MemberDto memberDto,Model model) {
+	    System.out.println(memberDto.toString());
+	    memberService.insertMember(memberDto);
+	    
+		return "redirect:/index.jsp";
+	  }
+	
 	@RequestMapping(value="update",method=RequestMethod.GET)
 	public String update() {
 	    
