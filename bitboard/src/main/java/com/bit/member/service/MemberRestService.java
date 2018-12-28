@@ -1,6 +1,5 @@
 package com.bit.member.service;
 
-import java.util.List;
 import org.json.JSONObject;
 import com.bit.member.model.MemberDto;
 

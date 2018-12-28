@@ -6,7 +6,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.bit.board.dao.MemoDao;
 import com.bit.member.dao.MemberDao;
 import com.bit.member.model.MemberDto;
 
@@ -20,7 +19,6 @@ public class MemberRestServiceImpl implements MemberRestService {
   public String selectMember() {
     List<MemberDto> list = sqlSession.getMapper(MemberDao.class).selectMember();
     JSONArray array = new JSONArray();
-    JSONObject json = new JSONObject();
     for(MemberDto memberDto : list) {
       JSONObject mem = new JSONObject();
       mem.put("seq", memberDto.getSeq());
@@ -36,8 +34,7 @@ public class MemberRestServiceImpl implements MemberRestService {
       array.put(mem);
     }
     
-    json.put("memberlist", array);
-    return json.toString();
+    return array.toString();
   }
 
   @Override

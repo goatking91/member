@@ -3,8 +3,7 @@
 <%@ include file="/WEB-INF/views/common/public.jsp"%>
 
 <script type="text/javascript">
-  $(document).ready(
-          function() {
+  $(document).ready(function() {
             $.ajax({
               url: "${root}/member/restlist", //페이지 주소 수정 _1
               dataType: "JSON", //dataType 수정_2
@@ -13,20 +12,18 @@
                 console.log(data);
                 var html = "";
                 $.each(data, function(index, obj) {
-                  $.each(obj, function(index, obj) {
                     html += "<tr><td class='text-center'>" + obj.seq + "</td>";
                     html += "<td>" + obj.id + "</td>";
                     html += "<td><a href='${root}/member/view?id=" + obj.id
                             + "'>" + obj.name + "</a></td>";
                     html += "<td>" + obj.phone + "</td>";
                     html += "<td>" + obj.addrcode + "</td>";
-                  })
-                })
+                });
                 $('#member').append(html);
 
               }
-            })
-          })
+            });
+          });
 
 </script>
 <!-- Container ======================================================================================= -->
