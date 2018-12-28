@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.bit.member.model.AddressDto;
 import com.bit.member.model.MemberDto;
@@ -33,6 +32,12 @@ public class MemberRestController {
   public void insert(@RequestBody MemberDto memberDto) {
     memberRestService.insertMember(memberDto);
   }
+  
+  @RequestMapping(value = "restupdate", method = RequestMethod.PUT)
+  public void update(@RequestBody MemberDto memberDto) {
+    memberRestService.updateMember(memberDto);
+  }
+  
 
   @RequestMapping(value = "idcheck", method = RequestMethod.POST)
   public Map<Object, Object> idcheck(@RequestBody String id) {
@@ -46,10 +51,9 @@ public class MemberRestController {
     return map;
   }
 
-  @RequestMapping(value = "restlist", method = RequestMethod.POST)
-  public @ResponseBody String list() {
+  @RequestMapping(value = "restlist", method = RequestMethod.GET)
+  public String list() {
     String list = memberRestService.selectMember();
-    System.out.println(list);
     return list;
   }
 
@@ -111,3 +115,7 @@ public class MemberRestController {
     return json.toString();
   }
 }
+
+
+
+

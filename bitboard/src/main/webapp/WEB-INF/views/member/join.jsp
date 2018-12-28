@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/public.jsp" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -28,7 +27,7 @@
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">BitCamp</a>
+				<a class="navbar-brand" href="${pageContext.request.contextPath}/index.jsp">BitCamp</a>
 			</div>
 		</div>
 	</div>

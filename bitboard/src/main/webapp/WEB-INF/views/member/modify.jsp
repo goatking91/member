@@ -4,11 +4,39 @@
 <script type="text/javascript">
  $(document).ready(function(){
 	$('#save').click(function(){
-		var form = $('#updateForm').attr("method", "post").attr("action", "${pageContext.request.contextPath}/member/update");
-		form.submit();
-	});
-	 
- });
+	 /* var form = $('#updateForm').attr("method", "post").attr("action", "${pageContext.request.contextPath}/member/update");
+		form.submit();  */
+	
+ 	  var id = $("#id").val();
+		var nm = $("#name").val();
+		var birth = $("#birth").val();
+		var gender=$("input[name='gender']:checked").val();
+		
+		var phone = $("#phone").val();
+		var addr = $("#addr").val();
+		
+		var parameter = JSON.stringify({
+      'id' : id,
+      'nm' : nm,
+      'birth' : birth,
+      'gender' : gender,
+      'phone' : phone,
+      'addr' : addr
+});
+		
+		$.ajax({
+		  type : 'PUT',
+		  url : '${pageContext.request.contextPath}/member/restupdate',
+		  data : parameter,
+		  contentType : 'application/json;charset=UTF-8',
+		  success : function() {
+		    alert("수정성공");
+		    window.location.href = "${pageContext.request.contextPath}/member/view?id=${info.id}"
+		
+		  }
+		});
+	}); 
+ }); 
 
 </script>
 
