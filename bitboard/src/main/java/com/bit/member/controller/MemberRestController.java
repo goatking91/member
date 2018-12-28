@@ -16,9 +16,19 @@ public class MemberRestController {
   @Autowired
   MemberRestService memberRestService;
   
+
   @RequestMapping(value="restinsert",method=RequestMethod.POST)
   public void insert(@RequestBody MemberDto memberDto) {
     memberRestService.insertMember(memberDto);
   }
 
+  @RequestMapping(value="restupdate",method=RequestMethod.PUT)
+  public void update(@RequestBody MemberDto memberDto) {
+    memberRestService.updateMember(memberDto);
+  }
+
 }
+
+
+
+

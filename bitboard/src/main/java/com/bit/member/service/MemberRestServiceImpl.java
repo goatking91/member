@@ -32,6 +32,7 @@ public class MemberRestServiceImpl implements MemberRestService {
   @Override
   public void updateMember(MemberDto memberDto) {
 
+    sqlSession.getMapper(MemberDao.class).updateMember(memberDto);
   }
 
   @Override
