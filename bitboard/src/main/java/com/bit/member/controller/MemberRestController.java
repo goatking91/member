@@ -47,9 +47,8 @@ public class MemberRestController {
   }
 
   @RequestMapping(value = "restlist", method = RequestMethod.POST)
-  public @ResponseBody String list() {
+  public String list() {
     String list = memberRestService.selectMember();
-    System.out.println(list);
     return list;
   }
 
