@@ -8,7 +8,7 @@
             $.ajax({
               url: "${root}/member/restlist", //페이지 주소 수정 _1
               dataType: "JSON", //dataType 수정_2
-              type: "POST",
+              type: "GET",
               success: function(data) {
                 console.log(data);
                 var html = "";
