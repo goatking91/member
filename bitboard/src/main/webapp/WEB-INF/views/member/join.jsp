@@ -1,36 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BitCamp</title>
-<link href="${pageContext.request.contextPath}/css/bootstrap.css"
-	rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/bootswatch.min.css"
-	rel="stylesheet">
-<!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-</head>
-<body>
-
-	<!-- Main Navigation ========================================================================================== -->
-	<div class="navbar navbar-default navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target=".navbar-responsive-collapse">
-					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="${pageContext.request.contextPath}/index.jsp">BitCamp</a>
-			</div>
-		</div>
-	</div>
+<%@ include file="/WEB-INF/views/common/public.jsp"%>
 	<!-- Container ======================================================================================= -->
 	<div class="container">
 		<div class="row">
@@ -134,8 +104,8 @@
                 <label class="col-lg-2 control-label">상세주소</label>
 
                 <div class="col-lg-10">
-                  <input type="text" class="form-control" name="addr" id="addr"
-                    placeholder="주소">
+                  <input type="text" class="form-control" name="addr" id="addr2"
+                    placeholder="상세주소">
                 </div>
               </div>
 							<div class="form-group">
@@ -170,7 +140,7 @@
 		</footer>
 	</div>
 
-   <script type="text/javascript">
+  <script type="text/javascript">
   $(document).ready(function() {
     $("#insertBtn").click(function() {
       var id = $("#id").val();
