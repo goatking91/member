@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.bit.board.dao.MemoDao;
 import com.bit.member.dao.MemberDao;
 import com.bit.member.model.MemberDto;
 
@@ -56,7 +57,7 @@ public class MemberRestServiceImpl implements MemberRestService {
 
   @Override
   public void deleteMember(String id) {
-
+    sqlSession.getMapper(MemberDao.class).deleteMember(id);
   }
   
   @Override

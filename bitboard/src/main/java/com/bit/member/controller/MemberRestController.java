@@ -53,11 +53,18 @@ public class MemberRestController {
     return list;
   }
 
+  @RequestMapping(value="rest/{id}", method=RequestMethod.DELETE)
+  public String delete(@PathVariable(value="id") String id) {
+    memberRestService.deleteMember(id);
+    
+    return "shutup";
+  }
+
   @RequestMapping(value="postcode/{searchSe}/{currentPage}",method=RequestMethod.GET)
   public String postcode(@PathVariable String searchSe, @PathVariable int currentPage, @RequestParam("srchwrd") String srchwrd) throws Exception {
     //  public static final String ZIPCODE_API_KEY = "";
     String ZIPCODE_API_URL = "http://openapi.epost.go.kr:80/postal/retrieveNewAdressAreaCdService?_wadl&type=xml";
-    
+
     String ZIPCODE_API_KEY = "j545HfOMmD%2BvCeW66ABw9eQrM%2BFBfDa7KPlZSXqafhn0vrdAKIaM4cDto97kki8n%2FicDJl0p1zUDVQnkmI3zdw%3D%3D";
 
     JSONObject json = new JSONObject();
@@ -73,8 +80,8 @@ public class MemberRestController {
     queryUrl.append(currentPage);
 
 
-  
-    
+
+
 
 
     // document 선언
