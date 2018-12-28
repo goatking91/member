@@ -37,15 +37,29 @@
                         <li><a href="#">회원목록</a></li>
                     </ul>
                 </li>
-                <li>
-                	<a href="#" class="dropdown-toggle" data-toggle="dropdown">미디어관리</a>
-                	<ul class="dropdown-menu">
-                        <li><a href="#">미디어등록</a></li>
-                        <li><a href="#">미디어목록</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">대출관리</a></li>
-                <li><a href="#">공지사항</a></li>
+                <c:set var="idx" value="0" />
+                <c:forEach var="board" items="${menu }" varStatus="i">
+                  <c:if test="${board.ccode != idx}">
+                    <c:choose>
+                      <c:when test="${board.ccode == ccode }">
+                        <li class="active">
+                      </c:when>
+                      <c:otherwise>
+                        <li>
+                      </c:otherwise>
+                    </c:choose>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">${board.cname }</a>
+                    <c:set var="idx" value="${board.ccode }" />
+                    <ul class="dropdown-menu">
+                  </c:if>
+                  <li><a href="${root}/${board.control}/list.do?bcode=${board.bcode }&ccode=${board.ccode }&pg=1&key=&word=">${board.bname }</a></li>
+                  <c:if test="${i.index < menu.size() - 1 }">
+                    <c:if test="${idx !=  menu.get(i.index + 1).ccode}">
+                      </ul>
+                    </c:if>
+                  </c:if>
+                </c:forEach>
+                </ul>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="${ContextPath}/member/logout">로그아웃 (userId)</a></li>

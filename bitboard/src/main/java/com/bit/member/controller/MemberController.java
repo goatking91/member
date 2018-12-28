@@ -1,11 +1,14 @@
 package com.bit.member.controller;
 
+import java.util.Map;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import com.bit.board.admin.service.BoardAdminService;
 import com.bit.member.model.MemberDto;
 import com.bit.member.service.MemberService;
 
@@ -14,26 +17,36 @@ import com.bit.member.service.MemberService;
 public class MemberController {
 
   @Autowired
-  MemberService memberService;
+  private MemberService memberService;
+  
+  @Autowired
+  private BoardAdminService boardAdminService;
+  
+  @RequestMapping("/login")
+  public String login(HttpSession httpSession) {
+
+    return "redirect:/member/list";
+  }
 
   @RequestMapping(value="list",method=RequestMethod.GET)
-  public String selectMember(Model model) {
-
-    model.addAttribute("list", memberService.selectMember() );
-    return "list";
+  public String selectMember(Model model, Map<String, Object> menu) {
+   
+    model.addAttribute("menu", boardAdminService.getBoardMenu());
+    model.addAttribute("list", memberService.selectMember());
+    return "member/list";
   }
 
   @RequestMapping(value="view", method = RequestMethod.GET)
   public String infoMember(@RequestParam String id, Model model) {
 
     model.addAttribute("info", memberService.infoMember(id));
-    return "view";
+    return "member/view";
   }
 
   @RequestMapping(value="insert",method=RequestMethod.GET)
   public String insert() {
 
-    return "join";
+    return "member/join";
   }
 
   @RequestMapping(value = "insert", method = RequestMethod.POST)
@@ -47,7 +60,7 @@ public class MemberController {
   public String update(String id, Model model) {
 
     model.addAttribute("info", memberService.infoMember(id));
-    return "modify";
+    return "member/modify";
   }
 
   @RequestMapping(value = "update", method = RequestMethod.POST)

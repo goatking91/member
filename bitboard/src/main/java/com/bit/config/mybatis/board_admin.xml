@@ -5,14 +5,14 @@
 
 <mapper namespace="com.bit.board.admin.dao.BoardAdminDao">
   <select id="getBoardMenu" resultType="boardListDto">
-		select bl.bcode, bl.bname, bl.btype, bl.ccode, c.cname,
-		decode(bl.btype, 
-			5,'reboard', 
-			6,'album', 
-			7,'bbs', 
-			'board') control
-		from board_list bl join category c
-		on bl.ccode = c.ccode
-		order by ccode, bcode
+    select bl.bcode, bl.bname, bl.btype, bl.ccode, c.cname,
+        (CASE WHEN bl.btype=5 THEN 'reboard'
+              WHEN bl.btype=6 THEN 'album'
+              WHEN bl.btype=7 THEN 'bbs'
+        ELSE 'Board'
+        END) control
+    from board_list bl join category c
+    on bl.ccode = c.ccode
+    order by ccode, bcode;
   </select>
 </mapper>

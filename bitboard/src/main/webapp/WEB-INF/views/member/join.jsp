@@ -17,7 +17,7 @@
     <![endif]-->
 </head>
 <body>
-
+ 
 	<!-- Main Navigation ========================================================================================== -->
 	<div class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
@@ -50,7 +50,7 @@
 								<label class="col-lg-2 control-label">아이디</label>
 
 								<div class="col-lg-10">
-									<input type="text" class="form-control" name="id"
+									<input type="text" class="form-control" name="id" id="id"
 										placeholder="아이디">
 								</div>
 							</div>
@@ -58,7 +58,7 @@
 								<label class="col-lg-2 control-label">이름</label>
 
 								<div class="col-lg-10">
-									<input type="text" class="form-control" name="nm"
+									<input type="text" class="form-control" name="nm" id="nm"
 										placeholder="이름">
 								</div>
 							</div>
@@ -66,7 +66,7 @@
 								<label class="col-lg-2 control-label">비밀번호</label>
 
 								<div class="col-lg-10">
-									<input type="password" class="form-control" name="password"
+									<input type="password" class="form-control" name="password" id="password"
 										placeholder="비밀번호">
 								</div>
 							</div>
@@ -82,7 +82,7 @@
 								<label class="col-lg-2 control-label">생년월일</label>
 
 								<div class="col-lg-10">
-									<input type="text" class="form-control" name="birth"
+									<input type="text" class="form-control" name="birth" id="birth"
 										placeholder="생년월일 (입력 예: 2000-12-01)">
 								</div>
 							</div>
@@ -91,7 +91,7 @@
 
 								<div class="col-lg-10">
 									<div class="radio">
-										<label> <input type="radio" name="gender"
+										<label> <input type="radio" name="gender" id="gender"
 											id="optionsRadios1" value="0" checked> 남자
 										</label>
 									</div>
@@ -106,7 +106,7 @@
 								<label class="col-lg-2 control-label">전화번호</label>
 
 								<div class="col-lg-10">
-									<input type="text" class="form-control" name="phone"
+									<input type="text" class="form-control" name="phone" id="phone"
 										placeholder="전화번호">
 								</div>
 							</div>
@@ -114,7 +114,7 @@
 								<label class="col-lg-2 control-label">우편번호</label>
 
 								<div class="col-lg-10">
-									<input type="text" class="form-control" name="addrcode"
+									<input type="text" class="form-control" name="addrcode" id="addrcode"
 										placeholder="우편번호">
 								</div>
 							</div>
@@ -122,13 +122,13 @@
 								<label class="col-lg-2 control-label">주소</label>
 
 								<div class="col-lg-10">
-									<input type="text" class="form-control" name="addr"
+									<input type="text" class="form-control" name="addr" id="addr"
 										placeholder="주소">
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="col-lg-10 col-lg-offset-2">
-									<button type="submit" class="btn btn-primary">확인</button>
+									<button id="insertBtn" type="button" class="btn btn-primary">확인</button>
 									<a href="${pageContext.request.contextPath}/index.jsp"
 										class="btn btn-large btn-default">취소</a>
 								</div>
@@ -158,8 +158,49 @@
 		</footer>
 	</div>
 
-	<script src="${pageContext.request.contextPath}/js/jquery-2.1.0.js"></script>
-	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/bootswatch.js"></script>
+  <script src="${pageContext.request.contextPath}/js/jquery-2.1.0.js"></script>
+  <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+  <script src="${pageContext.request.contextPath}/js/bootswatch.js"></script>
+   <script type="text/javascript">
+  $(document).ready(function() {
+    $("#insertBtn").click(function() {
+      var id = $("#id").val();
+      var nm = $("#nm").val();
+      var password = $("#password").val();
+      var birth = $("#birth").val();
+      var gender;
+      if($("#gender").attr("checked", "checked")) {
+        gender = 0;
+      } else {
+        gender = 1;
+      } 
+      var phone = $("#phone").val();
+      var addrcode = $("#addrcode").val();
+      var addr = $("#addr").val();
+
+      var parameter = JSON.stringify({
+              'id' : id,
+              'nm' : nm,
+              'password' : password,
+              'birth' : birth,
+              'gender' : gender,
+              'phone' : phone,
+              'addrcode' : addrcode,
+              'addr' : addr
+      });
+      
+      $.ajax({
+        url:'${pageContext.request.contextPath}/member/restinsert',
+        data: parameter,
+        dataType: 'json',
+        contentType: 'application/json;charset=UTF-8',
+        type: 'POST',
+        success: function() {
+        }
+      });
+    });
+  });
+  </script>
+
 </body>
 </html>
