@@ -10,12 +10,8 @@
  	  var id = $("#id").val();
 		var nm = $("#name").val();
 		var birth = $("#birth").val();
-		var gender;
-		if($("#gender").attr('checked','checked')){
-		  gender = "0";
-		}else{
-		  gender = "1";
-		};
+		var gender=$("input[name='gender']:checked").val();
+		
 		var phone = $("#phone").val();
 		var addr = $("#addr").val();
 		
