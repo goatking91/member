@@ -1,9 +1,5 @@
 package com.bit.member.controller;
 
-<<<<<<< HEAD
-import org.json.JSONArray;
-=======
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,17 +9,13 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
->>>>>>> aa9c37de6f6bbf34e0497579d532691e73feacf4
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-<<<<<<< HEAD
-import org.springframework.web.bind.annotation.ResponseBody;
-=======
 import org.springframework.web.bind.annotation.RequestParam;
->>>>>>> aa9c37de6f6bbf34e0497579d532691e73feacf4
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.bit.member.model.AddressDto;
 import com.bit.member.model.MemberDto;
@@ -37,14 +29,14 @@ public class MemberRestController {
   @Autowired
   MemberRestService memberRestService;
 
-  @RequestMapping(value="restinsert",method=RequestMethod.POST)
+  @RequestMapping(value = "restinsert", method = RequestMethod.POST)
   public void insert(@RequestBody MemberDto memberDto) {
     memberRestService.insertMember(memberDto);
   }
-  
-  @RequestMapping(value="idcheck", method=RequestMethod.POST)
+
+  @RequestMapping(value = "idcheck", method = RequestMethod.POST)
   public Map<Object, Object> idcheck(@RequestBody String id) {
-    
+
     int count = 0;
     Map<Object, Object> map = new HashMap<Object, Object>();
 
@@ -52,6 +44,13 @@ public class MemberRestController {
     map.put("cnt", count);
 
     return map;
+  }
+
+  @RequestMapping(value = "restlist", method = RequestMethod.POST)
+  public @ResponseBody String list() {
+    String list = memberRestService.selectMember();
+    System.out.println(list);
+    return list;
   }
 
   @RequestMapping(value="postcode/{searchSe}/{currentPage}",method=RequestMethod.GET)
@@ -71,17 +70,11 @@ public class MemberRestController {
     queryUrl.append("&currentPage=");
     queryUrl.append(currentPage);
 
-<<<<<<< HEAD
-  @RequestMapping(value="restlist",method=RequestMethod.POST)
-  public @ResponseBody String list() {
-    String list = memberRestService.selectMember();
-    System.out.println(list);
-    return list;
-  }
 
+  
     
 
-=======
+
     // document 선언
     Document document = Jsoup.connect(queryUrl.toString()).get();
     // errorCode 선언
@@ -109,5 +102,4 @@ public class MemberRestController {
     }
     return json.toString();
   }
->>>>>>> aa9c37de6f6bbf34e0497579d532691e73feacf4
 }
