@@ -8,7 +8,11 @@
 		insert into member (id, nm, password, birth, gender, phone, addrcode, addr)
 		values (#{id}, #{nm}, #{password}, #{birth}, #{gender}, #{phone}, #{addrcode}, #{addr})
 	</insert>
-
+	
+	<select id="idcheck" resultType="int">
+      SELECT COUNT(*) FROM member
+      WHERE id = #{id}
+  </select>
 
 	<select id="infoMember" parameterType="String" resultType="memberDto">
 		select * from member where id = #{id}
