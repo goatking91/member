@@ -38,5 +38,12 @@ public class MemberRestServiceImpl implements MemberRestService {
   public void deleteMember(String id) {
 
   }
+  
+  @Override
+  public int idcheck(String id) {
+    int count = 0;
+    count = sqlSession.getMapper(MemberDao.class).idcheck(id);
+    return count;
+  }
 
 }

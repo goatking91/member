@@ -1,8 +1,10 @@
 package com.bit.member.controller;
 
-import java.net.URLEncoder;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -30,6 +32,18 @@ public class MemberRestController {
   @RequestMapping(value="restinsert",method=RequestMethod.POST)
   public void insert(@RequestBody MemberDto memberDto) {
     memberRestService.insertMember(memberDto);
+  }
+  
+  @RequestMapping(value="idcheck", method=RequestMethod.POST)
+  public Map<Object, Object> idcheck(@RequestBody String id) {
+    
+    int count = 0;
+    Map<Object, Object> map = new HashMap<Object, Object>();
+
+    count = memberRestService.idcheck(id);
+    map.put("cnt", count);
+
+    return map;
   }
 
   @RequestMapping(value="postcode/{searchSe}/{currentPage}",method=RequestMethod.GET)

@@ -59,6 +59,7 @@
                     </c:if>
                   </c:if>
                 </c:forEach>
+                </li>
                 </ul>
             </ul>
             <ul class="nav navbar-nav navbar-right">
