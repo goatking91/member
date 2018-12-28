@@ -58,10 +58,8 @@ public class MemberRestController {
   }
 
   @RequestMapping(value="rest/{id}", method=RequestMethod.DELETE)
-  public String delete(@PathVariable(value="id") String id) {
+  public void delete(@PathVariable(value="id") String id) {
     memberRestService.deleteMember(id);
-    
-    return "shutup";
   }
 
   @RequestMapping(value="postcode/{searchSe}/{currentPage}",method=RequestMethod.GET)
