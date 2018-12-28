@@ -1,6 +1,5 @@
 package com.bit.member.controller;
 
-import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -74,5 +73,11 @@ public class MemberController {
     model.addAttribute("menu", boardAdminService.getBoardMenu());
     memberService.deleteMember(id);
     return "redirect:/member/list";
+  }
+  
+  @RequestMapping(value = "post", method = RequestMethod.GET)
+  public String post() {
+    
+    return "member/postcode";
   }
 }

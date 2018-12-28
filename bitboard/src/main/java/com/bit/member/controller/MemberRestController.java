@@ -1,5 +1,6 @@
 package com.bit.member.controller;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -53,29 +54,23 @@ public class MemberRestController {
     return list;
   }
 
-  @RequestMapping(value="postcode/{searchSe}/{currentPage}",method=RequestMethod.GET)
-  public String postcode(@PathVariable String searchSe, @PathVariable int currentPage, @RequestParam("srchwrd") String srchwrd) throws Exception {
+  @RequestMapping(value="postcode/{currentPage}",method=RequestMethod.GET)
+  public String postcode(@PathVariable int currentPage, @RequestParam("query") String query) throws Exception {
     //  public static final String ZIPCODE_API_KEY = "";
-    String ZIPCODE_API_URL = "http://openapi.epost.go.kr:80/postal/retrieveNewAdressAreaCdService?_wadl&type=xml";
+    String ZIPCODE_API_URL = "https://biz.epost.go.kr/KpostPortal/openapi";
     
-    String ZIPCODE_API_KEY = "j545HfOMmD%2BvCeW66ABw9eQrM%2BFBfDa7KPlZSXqafhn0vrdAKIaM4cDto97kki8n%2FicDJl0p1zUDVQnkmI3zdw%3D%3D";
+    String ZIPCODE_API_KEY = "6c167f32479c07fff1545979989858";
 
     JSONObject json = new JSONObject();
     StringBuilder queryUrl = new StringBuilder();
     queryUrl.append(ZIPCODE_API_URL);
-    queryUrl.append("?ServiceKey=");
+    queryUrl.append("?regkey=");
     queryUrl.append(ZIPCODE_API_KEY);
-    queryUrl.append("&searchSe=");
-    queryUrl.append(searchSe);
-    queryUrl.append("&srchwrd=");
-    queryUrl.append(srchwrd);
-    queryUrl.append("&currentPage=");
-    queryUrl.append(currentPage);
-
-
-  
+    queryUrl.append("&target=postNew&query=");
+    queryUrl.append(URLEncoder.encode(query.replaceAll(" ", ""), "EUC-KR"));
     
-
+    System.out.println(queryUrl);
+    
 
     // document 선언
     Document document = Jsoup.connect(queryUrl.toString()).get();
@@ -85,17 +80,19 @@ public class MemberRestController {
     if(null == errorCode || "".equals(errorCode))
     {
       Elements elements = document.select("item");
+      System.out.println(elements.toString());
       List<AddressDto> list = new ArrayList<>();
       AddressDto addressDto = null;
 
       for(Element element : elements){
         addressDto = new AddressDto();
-        addressDto.setPostcode(element.select("zipNo").text());
-        addressDto.setAddress(element.select("lnmAdres").text());
+        addressDto.setPostcode(element.select("postcd").text());
+        addressDto.setAddress(element.select("address").text());
         list.add(addressDto);
       }
       // list 결과 put
       json.put("list", list);
+      System.out.println(list.toString());
     }else{
       String errorMessage = document.select("message").text();
       json.put("errorCode", errorCode);
