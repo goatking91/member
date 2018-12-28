@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.bit.member.model.AddressDto;
 import com.bit.member.model.MemberDto;
@@ -34,6 +33,12 @@ public class MemberRestController {
   public void insert(@RequestBody MemberDto memberDto) {
     memberRestService.insertMember(memberDto);
   }
+  
+  @RequestMapping(value = "restupdate", method = RequestMethod.PUT)
+  public void update(@RequestBody MemberDto memberDto) {
+    memberRestService.updateMember(memberDto);
+  }
+  
 
   @RequestMapping(value = "idcheck", method = RequestMethod.POST)
   public Map<Object, Object> idcheck(@RequestBody String id) {
@@ -47,12 +52,17 @@ public class MemberRestController {
     return map;
   }
 
-  @RequestMapping(value = "restlist", method = RequestMethod.POST)
-  public @ResponseBody String list() {
+  @RequestMapping(value = "restlist", method = RequestMethod.GET)
+  public String list() {
     String list = memberRestService.selectMember();
-    System.out.println(list);
     return list;
   }
+  
+  @RequestMapping(value="rest/{id}", method=RequestMethod.DELETE)
+  public void delete(@PathVariable(value="id") String id) {
+    memberRestService.deleteMember(id);
+  }
+
 
   @RequestMapping(value="postcode/{currentPage}",method=RequestMethod.GET)
   public String postcode(@PathVariable int currentPage, @RequestParam("query") String query) throws Exception {
@@ -61,16 +71,17 @@ public class MemberRestController {
     
     String ZIPCODE_API_KEY = "6c167f32479c07fff1545979989858";
 
+
     JSONObject json = new JSONObject();
     StringBuilder queryUrl = new StringBuilder();
     queryUrl.append(ZIPCODE_API_URL);
     queryUrl.append("?regkey=");
     queryUrl.append(ZIPCODE_API_KEY);
+
     queryUrl.append("&target=postNew&query=");
     queryUrl.append(URLEncoder.encode(query.replaceAll(" ", ""), "EUC-KR"));
     
     System.out.println(queryUrl);
-    
 
     // document 선언
     Document document = Jsoup.connect(queryUrl.toString()).get();
@@ -101,3 +112,7 @@ public class MemberRestController {
     return json.toString();
   }
 }
+
+
+
+
