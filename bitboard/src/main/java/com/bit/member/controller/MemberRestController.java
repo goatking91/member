@@ -47,7 +47,7 @@ public class MemberRestController {
   }
 
   @RequestMapping(value="postcode/{searchSe}/{currentPage}",method=RequestMethod.GET)
-  public String postcode(@PathVariable String searchSe, @PathVariable int currentPage, @RequestParam("dong") String dong) throws Exception {
+  public String postcode(@PathVariable String searchSe, @PathVariable int currentPage, @RequestParam("srchwrd") String srchwrd) throws Exception {
     //  public static final String ZIPCODE_API_KEY = "";
     String ZIPCODE_API_URL = "http://openapi.epost.go.kr:80/postal/retrieveNewAdressAreaCdService?_wadl&type=xml";
     
@@ -60,6 +60,8 @@ public class MemberRestController {
     queryUrl.append(ZIPCODE_API_KEY);
     queryUrl.append("&searchSe=");
     queryUrl.append(searchSe);
+    queryUrl.append("&srchwrd=");
+    queryUrl.append(srchwrd);
     queryUrl.append("&currentPage=");
     queryUrl.append(currentPage);
 
@@ -77,7 +79,6 @@ public class MemberRestController {
       for(Element element : elements){
         addressDto = new AddressDto();
         addressDto.setPostcode(element.select("zipNo").text());
-        // 지번 검색
         addressDto.setAddress(element.select("lnmAdres").text());
         list.add(addressDto);
       }

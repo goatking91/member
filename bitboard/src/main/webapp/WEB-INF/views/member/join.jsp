@@ -49,11 +49,13 @@
 							<div class="form-group">
 								<label class="col-lg-2 control-label">아이디</label>
 
-								<div class="col-lg-5">
+								<div class="col-lg-8">
 									<input type="text" class="form-control" name="id" id="id"
 										placeholder="아이디">
 								</div>
+								<div class="col-lg-2">
 								<button id="idcheck" type="button" class="btn btn-primary">중복확인</button>
+								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-lg-2 control-label">이름</label>
@@ -113,11 +115,13 @@
 							</div>
 							<div class="form-group">
 								<label class="col-lg-2 control-label">우편번호</label>
-
-								<div class="col-lg-10">
-									<input type="text" class="form-control" name="addrcode"
-										id="addrcode" placeholder="우편번호">
-								</div>
+                <div class="col-lg-8">
+                  <input type="text" class="form-control" name="addrcode"
+                    id="addrcode" placeholder="우편번호">
+                </div>
+                <div class="col-lg-2">
+                <button id="postcode" type="button" class="btn btn-primary">중복확인</button>
+                </div>
 							</div>
 							<div class="form-group">
 								<label class="col-lg-2 control-label">주소</label>
@@ -127,6 +131,14 @@
 										placeholder="주소">
 								</div>
 							</div>
+							<div class="form-group">
+                <label class="col-lg-2 control-label">상세주소</label>
+
+                <div class="col-lg-10">
+                  <input type="text" class="form-control" name="addr" id="addr"
+                    placeholder="주소">
+                </div>
+              </div>
 							<div class="form-group">
 								<div class="col-lg-10 col-lg-offset-2">
 									<button id="insertBtn" type="button" class="btn btn-primary">확인</button>
