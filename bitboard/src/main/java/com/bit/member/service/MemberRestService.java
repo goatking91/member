@@ -1,12 +1,12 @@
 package com.bit.member.service;
 
-import org.json.JSONArray;
+import java.util.List;
 import org.json.JSONObject;
 import com.bit.member.model.MemberDto;
 
 public interface MemberRestService {
   
-  JSONArray selectMember();
+  String selectMember();
 
   JSONObject infoMember(String id);
 

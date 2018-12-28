@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/common/public.jsp" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -31,7 +32,6 @@
 			</div>
 		</div>
 	</div>
-
 	<!-- Container ======================================================================================= -->
 	<div class="container">
 		<div class="row">
@@ -171,10 +171,7 @@
 		</footer>
 	</div>
 
-	<script src="${pageContext.request.contextPath}/js/jquery-2.1.0.js"></script>
-	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/bootswatch.js"></script>
-	<script type="text/javascript">
+   <script type="text/javascript">
   $(document).ready(function() {
     $("#insertBtn").click(function() {
       var id = $("#id").val();
