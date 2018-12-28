@@ -1,5 +1,6 @@
 package com.bit.member.service;
 
+import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -15,8 +16,27 @@ public class MemberRestServiceImpl implements MemberRestService {
   SqlSession sqlSession;
 
   @Override
-  public JSONArray selectMember() {
-    return null;
+  public String selectMember() {
+    List<MemberDto> list = sqlSession.getMapper(MemberDao.class).selectMember();
+    JSONArray array = new JSONArray();
+    JSONObject json = new JSONObject();
+    for(MemberDto memberDto : list) {
+      JSONObject mem = new JSONObject();
+      mem.put("seq", memberDto.getSeq());
+      mem.put("id", memberDto.getId());
+      mem.put("password", memberDto.getPassword());
+      mem.put("name", memberDto.getNm());
+      mem.put("birth", memberDto.getBirth());
+      mem.put("gender", memberDto.getGender());
+      mem.put("addr", memberDto.getAddr());
+      mem.put("addrcode", memberDto.getAddrcode());
+      mem.put("phone", memberDto.getPhone());
+      
+      array.put(mem);
+    }
+    
+    json.put("memberlist", array);
+    return json.toString();
   }
 
   @Override

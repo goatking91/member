@@ -18,59 +18,60 @@ public class MemberController {
 
   @Autowired
   private MemberService memberService;
-  
+
   @Autowired
   private BoardAdminService boardAdminService;
-  
+
   @RequestMapping("/login")
   public String login(HttpSession httpSession) {
 
     return "redirect:/member/list";
   }
 
-  @RequestMapping(value="list",method=RequestMethod.GET)
-  public String selectMember(Model model, Map<String, Object> menu) {
-   
+  @RequestMapping(value = "list", method = RequestMethod.GET)
+  public String selectMember(Model model) {
     model.addAttribute("menu", boardAdminService.getBoardMenu());
     model.addAttribute("list", memberService.selectMember());
     return "member/list";
   }
 
-  @RequestMapping(value="view", method = RequestMethod.GET)
+  @RequestMapping(value = "view", method = RequestMethod.GET)
   public String infoMember(@RequestParam String id, Model model) {
-
+    model.addAttribute("menu", boardAdminService.getBoardMenu());
     model.addAttribute("info", memberService.infoMember(id));
     return "member/view";
   }
 
-  @RequestMapping(value="insert",method=RequestMethod.GET)
-  public String insert() {
-
+  @RequestMapping(value = "insert", method = RequestMethod.GET)
+  public String insert(Model model) {
+    model.addAttribute("menu", boardAdminService.getBoardMenu());
     return "member/join";
   }
 
   @RequestMapping(value = "insert", method = RequestMethod.POST)
   public String insertMember(MemberDto memberDto, Model model) {
-
+    model.addAttribute("menu", boardAdminService.getBoardMenu());
     memberService.insertMember(memberDto);
     return "redirect:/index.jsp";
   }
 
   @RequestMapping(value = "update", method = RequestMethod.GET)
   public String update(String id, Model model) {
-
+    model.addAttribute("menu", boardAdminService.getBoardMenu());
     model.addAttribute("info", memberService.infoMember(id));
     return "member/modify";
   }
 
   @RequestMapping(value = "update", method = RequestMethod.POST)
-  public String update(MemberDto memberDto) {
+  public String update(MemberDto memberDto,Model model) {
+    model.addAttribute("menu", boardAdminService.getBoardMenu());
     memberService.updateMember(memberDto);
     return "redirect:/member/list";
   }
 
   @RequestMapping(value = "delete", method = RequestMethod.GET)
-  public String deleteMember(String id) {
+  public String deleteMember(String id,Model model) {
+    model.addAttribute("menu", boardAdminService.getBoardMenu());
     memberService.deleteMember(id);
     return "redirect:/member/list";
   }

@@ -1,9 +1,11 @@
 package com.bit.member.controller;
 
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.bit.member.model.MemberDto;
 import com.bit.member.service.MemberRestService;
@@ -20,5 +22,14 @@ public class MemberRestController {
   public void insert(@RequestBody MemberDto memberDto) {
     memberRestService.insertMember(memberDto);
   }
+
+  @RequestMapping(value="restlist",method=RequestMethod.POST)
+  public @ResponseBody String list() {
+    String list = memberRestService.selectMember();
+    System.out.println(list);
+    return list;
+  }
+
+    
 
 }

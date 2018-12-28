@@ -1,37 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BitCamp</title>
-<link href="${pageContext.request.contextPath}/css/bootstrap.css"
-	rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/bootswatch.min.css"
-	rel="stylesheet">
-<!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-</head>
-<body>
- 
-	<!-- Main Navigation ========================================================================================== -->
-	<div class="navbar navbar-default navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target=".navbar-responsive-collapse">
-					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">BitCamp</a>
-			</div>
-		</div>
-	</div>
-
+<%@ include file="/WEB-INF/views/common/public.jsp" %>
 	<!-- Container ======================================================================================= -->
 	<div class="container">
 		<div class="row">
@@ -158,9 +127,6 @@
 		</footer>
 	</div>
 
-  <script src="${pageContext.request.contextPath}/js/jquery-2.1.0.js"></script>
-  <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-  <script src="${pageContext.request.contextPath}/js/bootswatch.js"></script>
    <script type="text/javascript">
   $(document).ready(function() {
     $("#insertBtn").click(function() {
