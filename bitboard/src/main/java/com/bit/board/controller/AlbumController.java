@@ -62,8 +62,8 @@ public class AlbumController {
     MemberDto memberDto =(MemberDto) httpSession.getAttribute("userInfo");
     if(memberDto != null) {
       albumDto.setId(memberDto.getId());
-      albumDto.setName(memberDto.getName());
-      albumDto.setEmail(memberDto.getEmail());
+//      albumDto.setName(memberDto.getName());
+//      albumDto.setEmail(memberDto.getEmail());
       
       if(multipartFile != null && !multipartFile.isEmpty()) {
         String opicture = multipartFile.getOriginalFilename();

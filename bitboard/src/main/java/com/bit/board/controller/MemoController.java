@@ -24,7 +24,7 @@ public class MemoController {
     MemberDto memberDto = (MemberDto) session.getAttribute("userInfo");
     if(memberDto != null) {
       memoDto.setId(memberDto.getId());
-      memoDto.setName(memberDto.getName());
+//      memoDto.setName(memberDto.getName());
       int cnt = memoService.writeMemo(memoDto);
     }
     String memolist = memoService.listMemo(memoDto.getSeq());
@@ -42,7 +42,7 @@ public class MemoController {
     MemberDto memberDto = (MemberDto) session.getAttribute("userInfo");
     if(memberDto != null) {
       memoDto.setId(memberDto.getId());
-      memoDto.setName(memberDto.getName());
+//      memoDto.setName(memberDto.getName());
       int cnt = memoService.modifyMemo(memoDto);
     }
     String memolist = memoService.listMemo(memoDto.getSeq());

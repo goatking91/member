@@ -51,8 +51,8 @@ public class ReboardController {
     MemberDto memberDto =(MemberDto) httpSession.getAttribute("userInfo");
     if(memberDto != null) {
       reboardDto.setId(memberDto.getId());
-      reboardDto.setName(memberDto.getName());
-      reboardDto.setEmail(memberDto.getEmail());
+//      reboardDto.setName(memberDto.getName());
+//      reboardDto.setEmail(memberDto.getEmail());
       
       int seq = reboardService.writeArticle(reboardDto);
       if (seq != 0) {
@@ -91,8 +91,8 @@ public class ReboardController {
     MemberDto memberDto =(MemberDto) httpSession.getAttribute("userInfo");
     if(memberDto != null) {
       reboardDto.setId(memberDto.getId());
-      reboardDto.setName(memberDto.getName());
-      reboardDto.setEmail(memberDto.getEmail());
+//      reboardDto.setName(memberDto.getName());
+//      reboardDto.setEmail(memberDto.getEmail());
       
       int seq = reboardService.replyArticle(reboardDto);
       if (seq != 0) {

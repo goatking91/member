@@ -50,8 +50,8 @@ public class BoardController {
     MemberDto memberDto =(MemberDto) httpSession.getAttribute("userInfo");
     if(memberDto != null) {
       boardDto.setId(memberDto.getId());
-      boardDto.setName(memberDto.getName());
-      boardDto.setEmail(memberDto.getEmail());
+//      boardDto.setName(memberDto.getName());
+//      boardDto.setEmail(memberDto.getEmail());
 
       int seq = boardService.writeArticle(boardDto);
       if (seq != 0) {
