@@ -15,4 +15,7 @@ public interface MemberRestService {
   void updateMember(MemberDto memberDto);
 
   void deleteMember(String id);
+  
+  int idcheck(String id);
+  
 }
