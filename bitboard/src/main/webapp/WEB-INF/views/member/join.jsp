@@ -1,6 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<<<<<<< HEAD
 <%@ include file="/WEB-INF/views/common/public.jsp" %>
+=======
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BitCamp</title>
+<link href="${pageContext.request.contextPath}/css/bootstrap.css"
+	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/bootswatch.min.css"
+	rel="stylesheet">
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+	<!-- Main Navigation ========================================================================================== -->
+	<div class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-responsive-collapse">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">BitCamp</a>
+			</div>
+		</div>
+	</div>
+
+>>>>>>> aa9c37de6f6bbf34e0497579d532691e73feacf4
 	<!-- Container ======================================================================================= -->
 	<div class="container">
 		<div class="row">
@@ -18,10 +53,11 @@
 							<div class="form-group">
 								<label class="col-lg-2 control-label">아이디</label>
 
-								<div class="col-lg-10">
+								<div class="col-lg-5">
 									<input type="text" class="form-control" name="id" id="id"
 										placeholder="아이디">
 								</div>
+								<button id="idcheck" type="button" class="btn btn-primary">중복확인</button>
 							</div>
 							<div class="form-group">
 								<label class="col-lg-2 control-label">이름</label>
@@ -35,8 +71,8 @@
 								<label class="col-lg-2 control-label">비밀번호</label>
 
 								<div class="col-lg-10">
-									<input type="password" class="form-control" name="password" id="password"
-										placeholder="비밀번호">
+									<input type="password" class="form-control" name="password"
+										id="password" placeholder="비밀번호">
 								</div>
 							</div>
 							<div class="form-group">
@@ -83,8 +119,8 @@
 								<label class="col-lg-2 control-label">우편번호</label>
 
 								<div class="col-lg-10">
-									<input type="text" class="form-control" name="addrcode" id="addrcode"
-										placeholder="우편번호">
+									<input type="text" class="form-control" name="addrcode"
+										id="addrcode" placeholder="우편번호">
 								</div>
 							</div>
 							<div class="form-group">
@@ -127,7 +163,14 @@
 		</footer>
 	</div>
 
+<<<<<<< HEAD
    <script type="text/javascript">
+=======
+	<script src="${pageContext.request.contextPath}/js/jquery-2.1.0.js"></script>
+	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/bootswatch.js"></script>
+	<script type="text/javascript">
+>>>>>>> aa9c37de6f6bbf34e0497579d532691e73feacf4
   $(document).ready(function() {
     $("#insertBtn").click(function() {
       var id = $("#id").val();
@@ -165,7 +208,49 @@
         }
       });
     });
+    
+	  //아이디 체크여부 확인 (아이디 중복일 경우 = 0 , 중복이 아닐경우 = 1 )
+	  var idck = 0;
+    //idck 버튼을 클릭했을 때 
+    $("#idcheck").click(function() {
+      //userid 를 param.
+      var memberid = $("#id").val();
+
+      $.ajax({
+        async: true,
+        type: 'POST',
+        data: memberid,
+        url: "${pageContext.request.contextPath}/member/idcheck",
+        dataType: "json",
+        contentType: "application/json; charset=UTF-8",
+        success: function(data) {
+          if (data.cnt > 0) {
+            alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
+            //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
+            $("#divInputId").addClass("has-error")
+            $("#divInputId").removeClass("has-success")
+            $("#userid").focus();
+
+          } else {
+            alert("사용가능한 아이디입니다.");
+            //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
+            $("#divInputId").addClass("has-success")
+            $("#divInputId").removeClass("has-error")
+            $("#userpwd").focus();
+            //아이디가 중복하지 않으면  idck = 1 
+            idck = 1;
+          }
+        },
+        error: function(error) {
+
+          alert("error : " + error);
+        }
+      });
+    });
+  
   });
+  
+  
   </script>
 
 </body>

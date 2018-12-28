@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<<<<<<< HEAD
 <c:set var="root" value="${pageContext.request.contextPath }" />
 <c:set var="bcode" value="${param.bcode }" />
 <c:set var="ccode" value="${param.ccode }" />
@@ -8,6 +9,8 @@
 <c:set var="key" value="${param.key }" />
 <c:set var="word" value="${param.word }" />
 <c:set var="seq" value="${param.seq }" />
+=======
+>>>>>>> aa9c37de6f6bbf34e0497579d532691e73feacf4
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -15,15 +18,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BitCamp</title>
+<<<<<<< HEAD
     <link href="${root}/css/bootstrap.css" rel="stylesheet">
     <link href="${root}/css/bootswatch.min.css" rel="stylesheet">
+=======
+    <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/bootswatch.min.css" rel="stylesheet">
+>>>>>>> aa9c37de6f6bbf34e0497579d532691e73feacf4
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+<<<<<<< HEAD
     <script src="${root}/js/jquery-2.1.0.js"></script>
     <script src="${root}/js/bootstrap.min.js"></script>
     <script src="${root}/js/bootswatch.js"></script>
+=======
+		<script src="${pageContext.request.contextPath}/js/jquery-2.1.0.js"></script>
+		<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+		<script src="${pageContext.request.contextPath}/js/bootswatch.js"></script>
+>>>>>>> aa9c37de6f6bbf34e0497579d532691e73feacf4
 </head>
 <body>
 
@@ -36,15 +50,24 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+<<<<<<< HEAD
             <a class="navbar-brand" href="${root}/member/list">BitCamp</a>
+=======
+            <a class="navbar-brand" href="#">BitCamp</a>
+>>>>>>> aa9c37de6f6bbf34e0497579d532691e73feacf4
         </div>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
             <ul class="nav navbar-nav">
                 <li class="active">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">회원관리</a>
                   <ul class="dropdown-menu">
+<<<<<<< HEAD
                         <li><a href="${root}/member/insert">회원등록</a></li>
                         <li><a href="${root}/member/list">회원목록</a></li>
+=======
+                        <li><a href="#">회원등록</a></li>
+                        <li><a href="#">회원목록</a></li>
+>>>>>>> aa9c37de6f6bbf34e0497579d532691e73feacf4
                     </ul>
                 </li>
                 <c:set var="idx" value="0" />
@@ -73,7 +96,11 @@
                 </ul>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+<<<<<<< HEAD
                 <li><a href="${root}/member/logout">로그아웃 (userId)</a></li>
+=======
+                <li><a href="${ContextPath}/member/logout">로그아웃 (userId)</a></li>
+>>>>>>> aa9c37de6f6bbf34e0497579d532691e73feacf4
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">설정 <b class="caret"></b></a>
                     <ul class="dropdown-menu">
