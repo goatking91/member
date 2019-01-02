@@ -19,7 +19,7 @@
     select count(seq)
 		from board
 		where bcode = #{bcode}
-		and to_char(logtime, 'yymmdd') = to_char(sysdate, 'yymmdd')
+		and date_format(logtime,'%y%m%d') = date_format(now(),'%y%m%d')
   </select>
   
   <select id="getTotalArticleCount" parameterType="Map" resultType="int">
@@ -29,7 +29,7 @@
     <if test="word != null and word != ''">
       <choose>
         <when test="key =='subject'">
-          and subject like '%'||#{word}||'%'
+          and subject like CONCAT('%',#{word},'%')
         </when>
         <otherwise>
           and ${key} = #{word}

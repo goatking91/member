@@ -1,15 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>BitCamp</title>
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/bootswatch.min.css" rel="stylesheet">
-    <style type="text/css">
+  pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/common/public.jsp" %>
+
+<style type="text/css">
         body {
             padding-top: 100px;
             padding-bottom: 40px;
@@ -55,40 +48,52 @@
         }
 
     </style>
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-</head>
-<body>
 <div class="container">
 
     <!-- header -->
     <div class="info-header">
-        <h2 class="info-heading">주소 검색</h2>
+        <h2 class="info-heading">쓰기 완료</h2>
     </div>
 
     <!-- body -->
     <div class="info-body">
-
-        <h3>주소 검색</h3>
-        <p>안내 내용 출력합니다.</p>
-
-        <div class="row info-btn">
-            <button class="btn btn-large btn-default">확인</button>
-            <button class="btn btn-large btn-default">취소</button>
-        </div>
-            
+<c:choose>
+  <c:when test="${errorMsg != null }">
+    <h3>쓰기 에러</h3>
+    <p>${errorMsg }</p>
+  </c:when>
+<c:otherwise>
+    <script type="text/javascript">
+      control="${root}/reboard";
+      
+      initVars();
+      $(document).ready(function() {
+        
+        $("#viewBtn").click(function() {
+          $("#seq").val("${wseq}");
+          $("#commonForm").attr("method", "get").attr("action", viewpath).submit();
+        });
+        
+        $("#listBtn").click(function() {
+          $("#commonForm").attr("method", "get").attr("action", listpath).submit();
+        });
+        
+      });
+    </script>
+    <h3>글쓰기 완료</h3>
+    <p>게시물 등록이 완료되었습니다.</p>
+    <div class="row info-btn">
+      <button class="btn btn-large btn-default" id ="listBtn">홈으로 이동</button>
+      <button class="btn btn-large btn-default" id ="viewBtn">새글 확인</button>
     </div>
-
+  </c:otherwise>
+</c:choose>
+    </div>
     <!-- footer -->
     <div class="info-footer">
         <p>© BitCamp 2018.</p>
     </div>
 </div>
 
-<script src="js/jquery-2.1.0.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/bootswatch.js"></script>
 </body>
 </html>

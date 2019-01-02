@@ -17,9 +17,11 @@ public class ReboardServiceImpl implements ReboardService {
   @Autowired
   private SqlSession sqlSession;
   
+  @Transactional
   @Override
   public int writeArticle(ReboardDto reboardDto) {
-    int seq = sqlSession.getMapper(CommonDao.class).getNextSeq();
+    sqlSession.getMapper(ReboardDao.class).writeBoard(reboardDto);
+    int seq = sqlSession.getMapper(ReboardDao.class).selectSeq(reboardDto);
     reboardDto.setSeq(seq);
     reboardDto.setRef(seq);
     int cnt = sqlSession.getMapper(ReboardDao.class).writeArticle(reboardDto);

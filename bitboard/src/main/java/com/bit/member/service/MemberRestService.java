@@ -1,19 +1,18 @@
 package com.bit.member.service;
 
-import org.json.JSONObject;
 import com.bit.member.model.MemberDto;
 
 public interface MemberRestService {
   
   String selectMember();
 
-  JSONObject infoMember(String id);
+  String infoMember(String id);
 
   void insertMember(MemberDto memberDto);
 
   void updateMember(MemberDto memberDto);
 
-  void deleteMember(String id);
+  void deleteMember(MemberDto memberDto);
   
   int idcheck(String id);
   

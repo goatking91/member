@@ -9,6 +9,8 @@ public interface BoardAdminDao {
   
   List<BoardListDto> getBoardMenu();
   
+  String getBoardName(int bcode);
+  
   List<CategoryDto> getCategory();
   void makeCategory(CategoryDto categoryDto);
   List<BoardTypeDto> getBoardType();

@@ -82,19 +82,18 @@ body {
 		</div>
 
 		<!-- form -->
-<!-- 		<form class="form-signin" action="member/list" method="get"> -->
+		<form class="form-signin" action="${pageContext.request.contextPath}/login" method="post">
 		<div class="form-signin">
-			<input type="text" class="form-control" id="inputEmail"
-				placeholder="아이디"> <input type="password"
-				class="form-control" id="inputPassword" placeholder="비밀번호">
+			<input type="text" class="form-control" name="id" placeholder="아이디"> 
+				<input type="password" class="form-control" name="password" placeholder="비밀번호">
 
 			<div class="row form-btn">
-				<button type="button" id="login" class="btn btn-large btn-warning">로그인</button>
+				<button type="submit" class="btn btn-large btn-warning">로그인</button>
 				<a href="${pageContext.request.contextPath}/member/insert"
 					class="btn btn-large btn-default">회원가입</a>
 			</div>
 			</div>
-<!-- 		</form> -->
+  		</form>
 
 		<!-- footer -->
 		<div class="login-footer">
@@ -109,8 +108,8 @@ body {
 	 $(document).ready(function(){
 	   $('#login').click(function(){
 	    location.href='${pageContext.request.contextPath}/member/list';  
-	 })
-	 })
+	   });
+	 });
 	
 	</script>
 </body>

@@ -4,35 +4,69 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bit.member.dao.MemberDao">
 
+  <insert id="insertUsers" parameterType="memberDto">
+    insert into users (id, password, enabled)
+    values (#{id}, #{password}, 1);
+  </insert>
+
+  <select id="getSeq" resultType="int">
+    select seq
+    from users
+    where id = #{id}
+  </select>
+
 	<insert id="insertMember" parameterType="memberDto">
-		insert into member (id, nm, password, birth, gender, phone, addrcode, addr)
-		values (#{id}, #{nm}, #{password}, #{birth}, #{gender}, #{phone}, #{addrcode}, #{addr})
+		insert into member (seq, name, email, birth, gender, phone, addrcode, addr, addr2)
+		values (#{seq}, #{name}, #{email}, #{birth}, #{gender}, #{phone}, #{addrcode}, #{addr}, #{addr2})
 	</insert>
 	
+  <insert id="insertAuthorities" parameterType="memberDto">
+    insert into authorities (seq, authority) 
+    values (#{seq}, 'ROLE_USER')
+  </insert>
+	
 	<select id="idcheck" resultType="int">
-      SELECT COUNT(*) FROM member
-      WHERE id = #{id}
+    SELECT COUNT(*) FROM users
+    WHERE id = #{id}
   </select>
 
 	<select id="infoMember" parameterType="String" resultType="memberDto">
-		select * from member where id = #{id}
+		select u.*, m.*
+		from users u join member m
+		on u.seq = m.seq
+		where u.id = #{id}
 	</select>
 
 	<select id="selectMember" resultType="memberDto">
-		select * from member
+		select * 
+		from member m 
+		join users u
+		on m.seq = u.seq
 	</select>
 
 	<update id="updateMember" parameterType="memberDto">
 		update member
-		set nm = #{nm}, birth = #{birth}, gender=#{gender}, phone=#{phone},
-		addr = #{addr}
-		where id = #{id}
+		set email = #{email}, birth = #{birth}, gender=#{gender}, phone=#{phone}, addrcode = #{addrcode},
+		addr = #{addr}, addr2 = #{addr2}
+		where seq = #{seq}
 	</update>
+	
+	<delete id="deleteAuthorities" parameterType="int">
+    delete
+    from authorities
+    where seq = #{seq}
+  </delete>
+  
+	<delete id="deleteMember" parameterType="int">
+    delete
+    from member
+    where seq = #{seq}
+  </delete>
 
-	<delete id="deleteMember">
+	<delete id="deleteUsers" parameterType="int">
 		delete
-		from member
-		where id = #{id}
+		from users
+		where seq = #{seq}
 	</delete>
 
 </mapper>

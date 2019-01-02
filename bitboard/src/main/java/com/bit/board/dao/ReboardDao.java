@@ -6,6 +6,8 @@ import com.bit.board.model.ReboardDto;
 
 public interface ReboardDao {
   
+  void writeBoard(ReboardDto reboardDto);
+  int selectSeq(ReboardDto reboardDto);
   int writeArticle(ReboardDto reboardDto);
   List<ReboardDto> listArticle(Map<String, String> param);
   ReboardDto viewArticle(int seq);

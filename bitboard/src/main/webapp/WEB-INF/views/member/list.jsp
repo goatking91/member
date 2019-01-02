@@ -5,7 +5,7 @@
 <script type="text/javascript">
   $(document).ready(function() {
             $.ajax({
-              url: "${root}/member/restlist", //페이지 주소 수정 _1
+              url: "${root}/member/rest", //페이지 주소 수정 _1
               dataType: "JSON", //dataType 수정_2
               type: "GET",
               success: function(data) {
@@ -17,7 +17,7 @@
                     html += "<td><a href='${root}/member/view?id=" + obj.id
                             + "'>" + obj.name + "</a></td>";
                     html += "<td>" + obj.phone + "</td>";
-                    html += "<td>" + obj.addrcode + "</td>";
+                    html += "<td>" + obj.email + "</td>";
                 });
                 $('#member').append(html);
 
@@ -60,7 +60,7 @@
 									<th class="text-center">ID</th>
 									<th class="text-center">회원명</th>
 									<th class="text-center">전화번호</th>
-									<th class="text-center">가입일</th>
+									<th class="text-center">이메일</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -71,7 +71,7 @@
 <!-- 								                            <tr> -->
 <%-- 								                                <td class="text-center">${list.seq}</td> --%>
 <%-- 								                                <td>${list.id }</td> --%>
-<%-- 								                                <td><a href="${pageContext.request.contextPath}/member/view?id=${list.id }">${list.nm }</a></td> --%>
+<%-- 								                                <td><a href="${pageContext.request.contextPath}/member/view?id=${list.id }">${list.name }</a></td> --%>
 <%-- 								                                <td>${list. phone }</td> --%>
 <%-- 								                                <td>${list.addrcode }</td> --%>
 <!-- 								                            </tr> -->

@@ -29,12 +29,12 @@ public class MemberRestController {
   @Autowired
   MemberRestService memberRestService;
 
-  @RequestMapping(value = "restinsert", method = RequestMethod.POST)
+  @RequestMapping(value = "rest", method = RequestMethod.POST)
   public void insert(@RequestBody MemberDto memberDto) {
     memberRestService.insertMember(memberDto);
   }
   
-  @RequestMapping(value = "restupdate", method = RequestMethod.PUT)
+  @RequestMapping(value = "rest", method = RequestMethod.PUT)
   public void update(@RequestBody MemberDto memberDto) {
     memberRestService.updateMember(memberDto);
   }
@@ -42,7 +42,6 @@ public class MemberRestController {
 
   @RequestMapping(value = "idcheck", method = RequestMethod.POST)
   public Map<Object, Object> idcheck(@RequestBody String id) {
-
     int count = 0;
     Map<Object, Object> map = new HashMap<Object, Object>();
 
@@ -52,15 +51,21 @@ public class MemberRestController {
     return map;
   }
 
-  @RequestMapping(value = "restlist", method = RequestMethod.GET)
+  @RequestMapping(value = "rest", method = RequestMethod.GET)
   public String list() {
     String list = memberRestService.selectMember();
     return list;
   }
   
+  @RequestMapping(value = "rest/{id}", method = RequestMethod.GET)
+  public String detail(@PathVariable(value="id") String id) {
+    return memberRestService.infoMember(id).toString();
+  }
+  
   @RequestMapping(value="rest/{id}", method=RequestMethod.DELETE)
-  public void delete(@PathVariable(value="id") String id) {
-    memberRestService.deleteMember(id);
+  public void delete(@PathVariable(value="id") String id, MemberDto meberDto) {
+    meberDto.setId(id);
+    memberRestService.deleteMember(meberDto);
   }
 
 
@@ -77,7 +82,8 @@ public class MemberRestController {
     queryUrl.append(ZIPCODE_API_URL);
     queryUrl.append("?regkey=");
     queryUrl.append(ZIPCODE_API_KEY);
-
+    queryUrl.append("&currentPage=");
+    queryUrl.append(currentPage);
     queryUrl.append("&target=postNew&query=");
     queryUrl.append(URLEncoder.encode(query.replaceAll(" ", ""), "EUC-KR"));
     
@@ -87,9 +93,25 @@ public class MemberRestController {
     Document document = Jsoup.connect(queryUrl.toString()).get();
     // errorCode 선언
     String errorCode = document.select("error_code").text();
-
+    
     if(null == errorCode || "".equals(errorCode))
     {
+      int totalPage = Integer.parseInt(document.select("totalPage").text());
+      int preEnd = (Integer.parseInt(document.select("currentPage").text())-1) / 10 * 10;
+      
+      int startPage = preEnd + 1;
+      int endPage = preEnd + 10;
+      
+      json.put("isNowFirst", startPage == 1);
+      json.put("isNowEnd", endPage >= totalPage);
+      
+      if(endPage > totalPage)
+        endPage = totalPage;
+      
+      json.put("startPage", startPage);
+      json.put("endPage", endPage);
+      json.put("currentPage", currentPage);
+      
       Elements elements = document.select("item");
       System.out.println(elements.toString());
       List<AddressDto> list = new ArrayList<>();

@@ -19,6 +19,11 @@ public class BoardAdminServiceImpl implements BoardAdminService {
   public List<BoardListDto> getBoardMenu() {
     return sqlSession.getMapper(BoardAdminDao.class).getBoardMenu();
   }
+  
+  @Override
+  public String getBoardName(int bcode) {
+    return sqlSession.getMapper(BoardAdminDao.class).getBoardName(bcode);
+  }
 
   @Override
   public List<CategoryDto> getCategory() {

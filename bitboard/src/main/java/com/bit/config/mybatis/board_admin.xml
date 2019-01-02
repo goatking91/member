@@ -9,10 +9,16 @@
         (CASE WHEN bl.btype=5 THEN 'reboard'
               WHEN bl.btype=6 THEN 'album'
               WHEN bl.btype=7 THEN 'bbs'
-        ELSE 'Board'
+        ELSE 'board'
         END) control
     from board_list bl join category c
     on bl.ccode = c.ccode
-    order by ccode, bcode;
+    order by ccode, bcode
+  </select>
+  
+  <select id="getBoardName" parameterType="int" resultType="String">
+    select bname
+    from board_list
+    where bcode = #{bcode}
   </select>
 </mapper>

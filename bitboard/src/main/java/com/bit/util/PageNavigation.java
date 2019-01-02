@@ -76,29 +76,21 @@ public class PageNavigation {
     int pageSize = BoardConstance.PAGE_COUNT;
     int preEnd = (pageNo - 1) / pageSize * pageSize;
 
-    tmpNavigator.append("<table cellpadding='0' cellspacing='0' border='0'>\n");
-    tmpNavigator.append(" <tr>\n");
+    tmpNavigator.append("<nav>\n");
+    tmpNavigator.append(" <ul class='pagination pagination-sm pagination-sm'>\n");
     if (this.isNowFirst()) {
-      tmpNavigator.append("  <td><font color='#999999'>\n");
-      tmpNavigator.append("   <img src='" + root + "/img/board/icon_prev02.gif' width='7' height='11' border='0' align='absmiddle' hspace='3'>");
-      tmpNavigator.append("   <label id='firstpage'>최신목록</label>\n");
-      tmpNavigator.append("   <img src='" + root + "/img/board/icon_prev01_dim.gif' width='3' height='11' border='0' align='absmiddle' hspace='3'>\n");
-      tmpNavigator.append("   이전</font>\n");
+      tmpNavigator.append("  <li class='disabled'>\n");
+      tmpNavigator.append("   <span>\n");
+      tmpNavigator.append("   <span aria-hidden='true'>&laquo</span>\n");
+      tmpNavigator.append("   </span>\n");
+      tmpNavigator.append("   </li>\n");
     } else {
-      tmpNavigator.append("  <td>\n");
-      tmpNavigator.append("   <img src='" + root + "/img/board/icon_prev02.gif' width='7' height='11' border='0' align='absmiddle' hspace='3'>");
-      tmpNavigator.append("   <label id='firstpage'>최신목록</label>\n");
-      tmpNavigator.append("   <img src='" + root + "/img/board/icon_prev01_dim.gif' width='3' height='11' border='0' align='absmiddle' hspace='3'>\n");
-      tmpNavigator.append("   <label class='mvpage' move-page-no='" + preEnd + "'>이전</label>");
+      tmpNavigator.append("  <li>\n");
+      tmpNavigator.append("   <span>");
+      tmpNavigator.append("   <a href='#' class='mvpage' move-page-no='" + preEnd + "'>&laquo</a>\n");
+      tmpNavigator.append("   </span>\n");
+      tmpNavigator.append("   </li>");
     }
-    tmpNavigator.append("  \n</td>\n");
-    tmpNavigator.append("  <td style='padding: 0 5 0 5'>\n");
-    tmpNavigator.append("   <table cellpadding='0' cellspacing='0' border='0'>\n");
-    tmpNavigator.append("    <tr>\n");
-    tmpNavigator.append("     <td width='1' nowrap><img src='" + root + "/img/board/n_tab.gif' width='1'");
-    tmpNavigator.append(" height='11' border='0' align='absmiddle'><br>");
-    tmpNavigator.append("     </td>\n");
-
     int startPage = preEnd + 1;
 
     int endPage = preEnd + pageSize;
@@ -107,38 +99,32 @@ public class PageNavigation {
 
     for (int i = startPage; i <= endPage; i++) {
       if (pageNo == i) {
-        tmpNavigator.append("     <td style='padding:0 7 0 7;' nowrap><font class='text_acc_02'><b>" + i + "</b></font></td>\n");
-        tmpNavigator.append("     <td width='1' nowrap><img src='" + root + "/img/board/n_tab.gif' width='1'");
-        tmpNavigator.append(" height='11' border='0' align='absmiddle'><br>\n");
+        tmpNavigator.append("     <li class='active'>\n");
+        tmpNavigator.append("     <span>" + i + "<span class='sr-only'>(current)</span></span>");
+        tmpNavigator.append(" </li>\n");
       } else {
-        tmpNavigator.append("     <td style='padding:0 7 0 7;' nowrap><label class='mvpage' move-page-no='" + i + "'>" + i + "</label></td>\n");
-        tmpNavigator.append("     <td width='1' nowrap><img src='" + root + "/img/board/n_tab.gif' width='1'");
-        tmpNavigator.append(" height='11' border='0' align='absmiddle'><br>\n");
+        tmpNavigator.append("     <li>\n");
+        tmpNavigator.append("     <a href='#' class='mvpage' move-page-no='" + i + "'>" + i + "</a>");
+        tmpNavigator.append(" </li>\n");
       }
     }
-    tmpNavigator.append("     </td>\n");
-    tmpNavigator.append("    </tr>\n");
-    tmpNavigator.append("   </table>\n");
-    tmpNavigator.append("  </td>\n");
-    tmpNavigator.append("  <td>\n");
 
     if (this.isNowEnd()) {
-      tmpNavigator.append("   <font color='#999999'>다음<img");
-      tmpNavigator.append("   src='" + root + "/img/board/icon_next01_dim.gif' width='3' height='11'");
-      tmpNavigator.append(" border='0' align='absmiddle' hspace='3'> \n");
-      tmpNavigator.append("   끝목록<img src='" + root + "/img/board/icon_next02_dim.gif' width='7' height='11'");
-      tmpNavigator.append(" border='0' align='absmiddle' hspace='3'></font>\n");
+      tmpNavigator.append("   <li class='disabled'>");
+      tmpNavigator.append("   <span>");
+      tmpNavigator.append("   <span aria-hidden='true'>&raquo</span>\n");
+      tmpNavigator.append("   </span>");
+      tmpNavigator.append(" </li>\n");
     } else {
-      tmpNavigator.append("   <label class='mvpage' move-page-no='" + (preEnd + pageSize + 1) + "'>다음</label><img");
-      tmpNavigator.append(" src='" + root + "/img/board/icon_next01_dim.gif' width='3' height='11'");
-      tmpNavigator.append(" border='0' align='absmiddle' hspace='3'>\n");
-      tmpNavigator.append("   <label class='mvpage' move-page-no='" + totalPageCount + "'>끝목록</label><img src='" + root + "/img/board/icon_next02_dim.gif' width='7' height='11'");
-      tmpNavigator.append(" border='0' align='absmiddle' hspace='3'>\n");
+      tmpNavigator.append("   <li>");
+      tmpNavigator.append("   <span>");
+      tmpNavigator.append("   <a href='#' class='mvpage' move-page-no='" + (preEnd + pageSize + 1) + "'>&raquo</a>\n");
+      tmpNavigator.append("   </span>");
+      tmpNavigator.append(" </li>\n");
     }
 
-    tmpNavigator.append("  </td>\n");
-    tmpNavigator.append(" </tr>\n");
-    tmpNavigator.append("</table>\n");
+    tmpNavigator.append("  </ul>\n");
+    tmpNavigator.append(" </nav>\n");
 
     this.navigator = tmpNavigator.toString();
   }

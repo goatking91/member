@@ -1,15 +1,15 @@
 package com.bit.member.controller;
 
-import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class IndexController {
   
   @RequestMapping("/")
-  public String index(Map<String, Object> model) {
-    
+  public String index(@RequestParam String error) {
+    System.out.println(error);
     return "index";
   }
   

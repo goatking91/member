@@ -8,7 +8,7 @@
 		form.submit();  */
 	
  	  var id = $("#id").val();
-		var name = $("#name").val();
+		var nm = $("#name").val();
 		var birth = $("#birth").val();
 		var gender=$("input[name='gender']:checked").val();
 		
@@ -17,7 +17,7 @@
 		
 		var parameter = JSON.stringify({
       'id' : id,
-      'name' : name,
+      'nm' : nm,
       'birth' : birth,
       'gender' : gender,
       'phone' : phone,
@@ -66,8 +66,8 @@
 										class="form-control" id="id" placeholder="아이디" value="${info.id }"
 										readonly></td>
 									<th class="text-center">회원명</th>
-									<td class="text-left"><input type="text" name="name"
-										class="form-control" id="name" placeholder="이름" value="${info.name }">
+									<td class="text-left"><input type="text" name="nm"
+										class="form-control" id="name" placeholder="이름" value="${info.nm }">
 									</td>
 								</tr>
 								<tr>

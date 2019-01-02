@@ -13,7 +13,7 @@
 				<div class="well">
 					<p>회원가입을 위해 아래 내용들을 작성해 주세요.</p>
 					<form class="form-horizontal" method="post"
-						action="${pageContext.request.contextPath}/member/insert">
+						action="${root}/member/insert">
 						<fieldset>
 							<div class="form-group">
 								<label class="col-lg-2 control-label">아이디</label>
@@ -30,10 +30,18 @@
 								<label class="col-lg-2 control-label">이름</label>
 
 								<div class="col-lg-10">
-									<input type="text" class="form-control" name="nm" id="nm"
+									<input type="text" class="form-control" name="name" id="name"
 										placeholder="이름">
 								</div>
 							</div>
+							<div class="form-group">
+                <label class="col-lg-2 control-label">이메일</label>
+
+                <div class="col-lg-10">
+                  <input type="email" class="form-control" name="email" id="email"
+                    placeholder="이메일">
+                </div>
+              </div>
 							<div class="form-group">
 								<label class="col-lg-2 control-label">비밀번호</label>
 
@@ -87,9 +95,11 @@
                 <div class="col-lg-8">
                   <input type="text" class="form-control" name="addrcode"
                     id="addrcode" placeholder="우편번호">
+                    
                 </div>
                 <div class="col-lg-2">
-                <button id="postcode" type="button" class="btn btn-primary">중복확인</button>
+                <button id="postcode" type="button" class="btn btn-primary">검색</button>
+ 
                 </div>
 							</div>
 							<div class="form-group">
@@ -144,7 +154,8 @@
   $(document).ready(function() {
     $("#insertBtn").click(function() {
       var id = $("#id").val();
-      var nm = $("#nm").val();
+      var name = $("#name").val();
+      var email = $("#email").val();
       var password = $("#password").val();
       var birth = $("#birth").val();
       var gender;
@@ -156,20 +167,23 @@
       var phone = $("#phone").val();
       var addrcode = $("#addrcode").val();
       var addr = $("#addr").val();
+      var addr2 = $("#addr2").val();
 
       var parameter = JSON.stringify({
               'id' : id,
-              'nm' : nm,
+              'name' : name,
+              'email' : email,
               'password' : password,
               'birth' : birth,
               'gender' : gender,
               'phone' : phone,
               'addrcode' : addrcode,
-              'addr' : addr
+              'addr' : addr,
+              'addr2' : addr2
       });
       
       $.ajax({
-        url:'${pageContext.request.contextPath}/member/restinsert',
+        url:'${pageContext.request.contextPath}/member/rest',
         data: parameter,
         dataType: 'json',
         contentType: 'application/json;charset=UTF-8',
@@ -185,45 +199,248 @@
     $("#idcheck").click(function() {
       //userid 를 param.
       var memberid = $("#id").val();
+      if (memberid.trim() == '') {
+        $('#myModalLabel').text("아이디 중복체크");
+        
+        var str = '<div class="well row text-center">';
+        str += '<label class="col-xs-12 control-label">아이디를 입력해주세요.</label>'
+        str += '</div>';
+        $('.modal-body').html(str);
+        
+        str = '<button type="button" class="btn btn-default" id="modalClose">Close</button>';
+        
+        $('.modal-footer').html(str);
+        
+        $('#myModal').modal();
+        
+      } else {
+        $.ajax({
+          async: true,
+          type: 'POST',
+          data: memberid,
+          url: "${pageContext.request.contextPath}/member/idcheck",
+          dataType: "json",
+          contentType: "application/json; charset=UTF-8",
+          success: function(data) {
+            if (data.cnt > 0) {
+              $('#myModalLabel').text("아이디 중복체크");
+              
+              var str = '<div class="well row text-center">';
+              str += '<label class="col-xs-12 control-label">아이디가 존재합니다. 다른 아이디를 입력해주세요.</label>'
+              str += '</div>';
+              $('.modal-body').html(str);
+              
+              str = '<button type="button" class="btn btn-default" id="modalClose">Close</button>';
+              
+              $('.modal-footer').html(str);
+              
+              $('#myModal').modal();
+              $("#userid").focus();
 
-      $.ajax({
-        async: true,
-        type: 'POST',
-        data: memberid,
-        url: "${pageContext.request.contextPath}/member/idcheck",
-        dataType: "json",
-        contentType: "application/json; charset=UTF-8",
-        success: function(data) {
-          if (data.cnt > 0) {
-            alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
-            //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
-            $("#divInputId").addClass("has-error")
-            $("#divInputId").removeClass("has-success")
-            $("#userid").focus();
+            } else {
+              $('#myModalLabel').text("아이디 중복체크");
+              
+              var str = '<div class="well row text-center">';
+              str += '<label class="col-xs-12 control-label">사용 가능한 아이디입니다.</label>'
+              str += '</div>';
+              $('.modal-body').html(str);
+              
+              str = '<button type="button" class="btn btn-default" id="modalClose">Close</button>';
+              
+              $('.modal-footer').html(str);
+              
+              $('#myModal').modal();
+              $("#userid").focus();
+              idck = 1;
+            }
+          },
+          error: function(error) {
 
-          } else {
-            alert("사용가능한 아이디입니다.");
-            //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
-            $("#divInputId").addClass("has-success")
-            $("#divInputId").removeClass("has-error")
-            $("#userpwd").focus();
-            //아이디가 중복하지 않으면  idck = 1 
-            idck = 1;
+            alert("error : " + error);
           }
-        },
-        error: function(error) {
-
-          alert("error : " + error);
-        }
-      });
+        });
+      }
+     
     });
     
     $("#postcode").click(function() {
+      $('#myModalLabel').text("우편 검색");
       
+      var str = '<div class="well row form-horizontal">';
+      str += '<label class="col-xs-2 control-label">주소검색</label>';
+      str += '<div class="col-xs-8">';
+      str += '<input type="text" class="form-control" id="addrSearchValue" placeholder="예) 판교역로 235, 분당 주공, 삼평동 681">';
+      str += '</div>';
+      str += '<div class="col-xs-2">';
+      str += '<button id="searchAddr" type="button" class="btn btn-primary">검색</button>';
+      str += '</div>';
+      str += '<div>';
+      str += '<table class = "table text-center">';
+      str += '<thead>';
+      str += '<tr>';
+      str += '<th style="width:80px;" class="text-center">우편번호</th>';
+      str += '<th class="text-center">주소</th>';
+      str += '</tr>';
+      str += '</thead>';
+      str += '<tbody id="resultAddr"></tbody>';
+      str += '</table>';
+      str += '</div>';
+      str += '</div>';
+      
+      $('.modal-body').html(str);
+      
+      str = '<button type="button" class="btn btn-default" id="modalClose">Close</button>';
+      
+      $('.modal-footer').html(str);
+      
+      $('#myModal').modal();
     });
     
+	  $(document).on("click", "#searchAddr", function() {
+	    var value = $('#addrSearchValue').val();
+	    addr(1, value);
+	  });
+	  
+	  $(document).on("click", ".addrBtn" , function() {
+	    var value = $('#addrSearchValue').val();
+      addr($(this).text(), value);
+	  });
+	  
+	  $(document).on("click", "#prevAddrBtn" , function() {
+      var value = $('#addrSearchValue').val();
+      var page = Math.trunc(($(this).attr("currentPage")-1)/10);
+      addr(page * 10, value);
+    });
+	  
+	  $(document).on("click", "#nextAddrBtn" , function() {
+      var value = $('#addrSearchValue').val();
+      var page = Math.trunc(($(this).attr("currentPage")-1)/10);
+      console.log(page);
+      addr(page * 10 + 11, value);
+    });
+	  
+	  $(document).on("click", ".adaptAddr" , function() {
+      var address = $(this).text();
+      var postcode = $(this).attr("postcode");
+      putaddr(postcode, address);
+    });
+	  
+	  $(document).on("click", "#modalClose", function() {
+	    $('#myModal').modal('hide');
+	    var str = '...';
+	    $('.modal-body').html(str);
+	    
+	    str = '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>';
+	    str += '<button type="button" class="btn btn-primary">Save changes</button>';
+	    
+	    $('.modal-footer').html(str);
+    });
+	  
   });
   
+  function addr(currentPage, value) {
+    $.ajax({
+      async: true,
+      type: 'GET',
+      url: "${pageContext.request.contextPath}/member/postcode/" + currentPage + "?query=" + value,
+      contentType: "application/json; charset=UTF-8",
+      success: function(data) {
+        var str = '';
+        console.log(JSON.parse(data));
+        var data = JSON.parse(data);
+        if(data.errorCode != null && data.errorCode != ''){
+          str += '<tr>';
+          str += '<td colspan="2">';
+          str += data.errorMessage;
+          str += '</td>';
+          str += '</tr>';
+        }
+        else{
+          var list = data.list;
+          
+          $.each(list, function(index, data) {
+            str += "<tr>";
+            str += "<td>";
+            str += data.postcode;
+            str += "</td>";
+            str += "<td>";
+            str += '<a href="#" class="adaptAddr" postcode="'+data.postcode+'">' + data.address + '</a>';
+            str += "</td>";
+            str += "</tr>";
+          });
+          str += '<tr>';
+          str += '<td colspan="2">';
+          str += '<nav>';
+          str += '<ul class="pagination pagination-sm pagination-sm">';
+          
+          if(data.isNowFirst) {
+            str += '<li class="disabled">';
+            str += '<span>';
+            str += '<span aria-hidden="true">&laquo;</span>';
+            str += '</span>';
+            str += '</li>';
+          } else {
+            str += '<li>';
+            str += '<span>';
+            str += '<a href="#" id="prevAddrBtn" currentPage="' + currentPage + '">&laquo;</a>'
+            str += '</span>';
+            str += '</li>';
+          }
+          
+          for(var i = data.startPage; i <= data.endPage; i++) {
+            if(i == data.currentPage) {
+              str += '<li class="active">';
+              str += '<span>' + i + '<span class="sr-only">(current)</span></span>';
+              str += '</li>';
+            }else {
+              str += '<li>';
+              str += '<a href="#" class="addrBtn">' + i + '</a>';
+              str += '</li>';
+            }
+          }
+          
+          if(data.isNowEnd) {
+            str += '<li class="disabled">';
+            str += '<span>';
+            str += '<span aria-hidden="true">&raquo;</span>';
+            str += '</span>';
+            str += '</li>';
+          } else {
+            str += '<li>';
+            str += '<span>';
+            str += '<a href="#" id="nextAddrBtn" currentPage="' + currentPage + '">&raquo;</a>'
+            str += '</span>';
+            str += '</li>';
+          }
+          
+          str += '</ul>';
+          str += '</nav>';
+          str += '</td>';
+          str += '</tr>';
+        }
+        $('#resultAddr').html('');
+        
+        $('#resultAddr').append(str);
+      }
+    });
+  }
+  
+  function putaddr(postcode, address) {
+    $('#myModal').modal('hide');
+    
+    $('#addrcode').val(postcode);
+    $('#addr').val(address);
+    $('#addrcode').attr("readonly","readonly");
+    $('#addr').attr("readonly","readonly");
+    $('#addr2').focus();
+    var str = '...';
+    $('.modal-body').html(str);
+    
+    str = '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>';
+    str += '<button type="button" class="btn btn-primary">Save changes</button>';
+    
+    $('.modal-footer').html(str);
+  }
   
   </script>
 

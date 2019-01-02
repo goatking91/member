@@ -4,13 +4,15 @@ public class MemberDto {
 
   private int seq;
   private String id;
-  private String nm;
+  private String name;
+  private String email;
   private String password;
   private String birth;
   private int gender;
   private String phone;
   private String addrcode;
   private String addr;
+  private String addr2;
 
   public int getSeq() {
     return seq;
@@ -24,11 +26,17 @@ public class MemberDto {
   public void setId(String id) {
     this.id = id;
   }
-  public String getNm() {
-    return nm;
+  public String getName() {
+    return name;
   }
-  public void setNm(String nm) {
-    this.nm = nm;
+  public void setName(String name) {
+    this.name = name;
+  }
+  public String getEmail() {
+    return email;
+  }
+  public void setEmail(String email) {
+    this.email = email;
   }
   public String getPassword() {
     return password;
@@ -66,8 +74,11 @@ public class MemberDto {
   public void setAddr(String addr) {
     this.addr = addr;
   }
-
-
-
+  public String getAddr2() {
+    return addr2;
+  }
+  public void setAddr2(String addr2) {
+    this.addr2 = addr2;
+  }
 
 }

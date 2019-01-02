@@ -10,10 +10,20 @@ public interface MemberDao {
   MemberDto infoMember(String id);
 
   void insertMember(MemberDto memberDto);
+  
+  int getSeq(MemberDto memberDto);
+  
+  void insertUsers(MemberDto memberDto);
+  
+  void insertAuthorities(MemberDto memberDto);
 
   void updateMember(MemberDto memberDto);
 
-  void deleteMember(String id);
+  void deleteMember(int seq);
+  
+  void deleteAuthorities(int seq);
+  
+  void deleteUsers(int seq);
   
   int idcheck(String id);
   
