@@ -120,7 +120,7 @@
               </div>
 							<div class="form-group">
 								<div class="col-lg-10 col-lg-offset-2">
-									<<a href="${pageContext.request.contextPath}/index.jsp" button id="insertBtn" type="button" class="btn btn-primary">확인</a></button>
+									<button id="insertBtn" type="button" class="btn btn-primary">확인</button>
 									<a href="${pageContext.request.contextPath}/index.jsp"
 										class="btn btn-large btn-default">취소</a>
 								</div>
@@ -185,11 +185,10 @@
       $.ajax({
         url:'${pageContext.request.contextPath}/member/rest',
         data: parameter,
-        dataType: 'json',
         contentType: 'application/json;charset=UTF-8',
         type: 'POST',
         success: function() {
-          location.href='${root}/member/list'
+          location.href='${root}/'
         }
       });
     });
