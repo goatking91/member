@@ -54,7 +54,7 @@
 								<label class="col-lg-2 control-label">비밀번호 확인</label>
 
 								<div class="col-lg-10">
-									<input type="password" class="form-control"
+									<input type="password" class="form-control" id="password2"
 										placeholder="비밀번호 확인">
 								</div>
 							</div>
@@ -152,47 +152,11 @@
 
   <script type="text/javascript">
   $(document).ready(function() {
-    $("#insertBtn").click(function() {
-      var id = $("#id").val();
-      var name = $("#name").val();
-      var email = $("#email").val();
-      var password = $("#password").val();
-      var birth = $("#birth").val();
-      var gender;
-      if($("#gender").attr("checked", "checked")) {
-        gender = 0;
-      } else {
-        gender = 1;
-      } 
-      var phone = $("#phone").val();
-      var addrcode = $("#addrcode").val();
-      var addr = $("#addr").val();
-      var addr2 = $("#addr2").val();
-
-      var parameter = JSON.stringify({
-              'id' : id,
-              'name' : name,
-              'email' : email,
-              'password' : password,
-              'birth' : birth,
-              'gender' : gender,
-              'phone' : phone,
-              'addrcode' : addrcode,
-              'addr' : addr,
-              'addr2' : addr2
-      });
-      
-      $.ajax({
-        url:'${pageContext.request.contextPath}/member/rest',
-        data: parameter,
-        contentType: 'application/json;charset=UTF-8',
-        type: 'POST',
-        success: function() {
-          location.href='${root}/'
-        }
-      });
-    });
-    
+	  var re = /^[a-zA-Z0-9]{8,16}$/; // 아이디와 패스워드가 적합한지 검사할 정규식
+	  var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	  var re3 = /^(\d+)[/|\-|\s]+[0|1](\d)[/|\-|\s]+([0|1|2|3]\d)$/;
+	  var re4 = /^\d{2,3}-\d{3,4}-\d{4}$/;
+	  
 	  //아이디 체크여부 확인 (아이디 중복일 경우 = 0 , 중복이 아닐경우 = 1 )
 	  var idck = 0;
     //idck 버튼을 클릭했을 때 
@@ -262,6 +226,195 @@
       }
      
     });
+	  
+	  
+	  
+	  
+	  
+	  
+    $("#insertBtn").click(function() {
+    	
+      var id = $("#id").val();
+      var name = $("#name").val();
+      var email = $("#email").val();
+      var password = $("#password").val();
+      var password2 = $("#password2").val();
+      
+      var birth = $("#birth").val();
+      var gender;
+      if($("#gender").attr("checked", "checked")) {
+        gender = 0;
+      } else {
+        gender = 1;
+      } 
+      var phone = $("#phone").val();
+      var addrcode = $("#addrcode").val();
+      var addr = $("#addr").val();
+      var addr2 = $("#addr2").val();
+      
+      if(id.trim() == ""){
+    	  
+     	  $('#myModalLabel').text("가입 에러");
+        var str = 'ID를 입력해주세요.';
+        $('.modal-body').html(str);
+        str = '<button type="button" class="btn btn-default" id="modalClose">Close</button>';
+        $('.modal-footer').html(str);
+        $('#myModal').modal();
+        return false;
+   		}
+        
+      if(!check(re, id, "아이디는 8~16자의 영문 대소문자와 숫자로만 입력해주세요")){
+    	  return false;
+      }
+        
+      if (idck != 1){
+    	  $('#myModalLabel').text("가입 에러");
+    	  var str = 'ID 중복확인 해주세요.';
+        $('.modal-body').html(str);
+        str = '<button type="button" class="btn btn-default" id="modalClose">Close</button>';
+        $('.modal-footer').html(str);
+        $('#myModal').modal();
+        return false;
+      }
+      
+			if(name.trim() == ""){
+	   	  $('#myModalLabel').text("가입 에러");
+	       var str = '이름을 입력해주세요.';
+	       $('.modal-body').html(str);
+	       str = '<button type="button" class="btn btn-default" id="modalClose">Close</button>';
+	       $('.modal-footer').html(str);
+	       $('#myModal').modal();
+	       return false;
+  		}
+			
+			
+			if(email.trim() == ""){
+	   	  $('#myModalLabel').text("가입 에러");
+	       var str = '이메일을 입력해주세요.';
+	       $('.modal-body').html(str);
+	       str = '<button type="button" class="btn btn-default" id="modalClose">Close</button>';
+	       $('.modal-footer').html(str);
+	       $('#myModal').modal();
+	       return false;
+  		}
+			
+			if(!check(re2, email, "이메일 형식으로 입력해주세요.")){
+		    return false;
+		  }
+			
+			if(password.trim() == ""){
+	   	  $('#myModalLabel').text("가입 에러");
+	       var str = '비밀번호를 입력해주세요.';
+	       $('.modal-body').html(str);
+	       str = '<button type="button" class="btn btn-default" id="modalClose">Close</button>';
+	       $('.modal-footer').html(str);
+	       $('#myModal').modal();
+	       return false;
+  		}
+			
+			if(!check(re, password, "비밀번호는 8~16자의 영문 대소문자와 숫자로만 입력해주세요")){
+		    return false;
+		  }
+			
+			if(password2.trim() == ""){
+	   	  $('#myModalLabel').text("가입 에러");
+	       var str = '비밀번호 확인을 입력해주세요.';
+	       $('.modal-body').html(str);
+	       str = '<button type="button" class="btn btn-default" id="modalClose">Close</button>';
+	       $('.modal-footer').html(str);
+	       $('#myModal').modal();
+	       return false;
+		  }
+					
+			if(!check(re, password2, "비밀번호 확인은 8~16자의 영문 대소문자와 숫자로만 입력해주세요")){
+		    return false;
+		  }
+			
+			if(password!=password2){
+				$('#myModalLabel').text("가입 에러");
+	       var str = '비밀번호가 맞지 않습니다.';
+	       $('.modal-body').html(str);
+	       str = '<button type="button" class="btn btn-default" id="modalClose">Close</button>';
+	       $('.modal-footer').html(str);
+	       $('#myModal').modal();
+	       return false;
+			}
+			
+			if (birth.trim().length != 10){
+				$('#myModalLabel').text("가입 에러");
+	       var str = '생년월일의 형식이 올바르지 않습니다.';
+	       $('.modal-body').html(str);
+	       str = '<button type="button" class="btn btn-default" id="modalClose">Close</button>';
+	       $('.modal-footer').html(str);
+	       $('#myModal').modal();
+			  return false;
+			}
+			
+			if(!check(re3, birth, "생년월일의 형식이 올바르지 않습니다.")){
+				return false;
+		  }
+			
+
+			if (phone.trim() != 12 && phone.trim().length != 13){
+				$('#myModalLabel').text("가입 에러");
+	       var str = '전화번호 형식이 올바르지 않습니다.';
+	       $('.modal-body').html(str);
+	       str = '<button type="button" class="btn btn-default" id="modalClose">Close</button>';
+	       $('.modal-footer').html(str);
+	       $('#myModal').modal();
+			  return false;
+			}
+		
+			if(!check(re4, phone, "전화번호의 형식이 올바르지 않습니다.")){
+				return false;
+		  }
+			
+			
+			if (addrcode == ""){
+				$('#myModalLabel').text("가입 에러");
+	       var str = '우편번호 형식이 올바르지 않습니다.';
+	       $('.modal-body').html(str);
+	       str = '<button type="button" class="btn btn-default" id="modalClose">Close</button>';
+	       $('.modal-footer').html(str);
+	       $('#myModal').modal();
+			  return false;
+			}
+			if (addr2 == ""){
+				$('#myModalLabel').text("가입 에러");
+	       var str = '상세주소를 입력해주세요.';
+	       $('.modal-body').html(str);
+	       str = '<button type="button" class="btn btn-default" id="modalClose">Close</button>';
+	       $('.modal-footer').html(str);
+	       $('#myModal').modal();
+			  return false;
+			}
+			
+	     var parameter = JSON.stringify({
+	            'id' : id,
+	            'name' : name,
+	            'email' : email,
+	            'password' : password,
+	            'birth' : birth,
+	            'gender' : gender,
+	            'phone' : phone,
+	            'addrcode' : addrcode,
+	            'addr' : addr,
+	            'addr2' : addr2
+	    });
+	    
+	    $.ajax({
+	      url:'${pageContext.request.contextPath}/member/rest',
+	      data: parameter,
+	      contentType: 'application/json;charset=UTF-8',
+	      type: 'POST',
+	      success: function() {
+	        location.href='${root}/'
+	      }
+	    }); 
+      
+    });
+    
+
     
     $("#postcode").click(function() {
       $('#myModalLabel').text("우편 검색");
@@ -441,7 +594,19 @@
     
     $('.modal-footer').html(str);
   }
-  
+  function check(re, what, message) {
+      if(re.test(what)) {
+          return true;
+      }
+      $('#myModalLabel').text("가입 에러");
+      $('.modal-body').html(message);
+      var str = '<button type="button" class="btn btn-default" id="modalClose">Close</button>';
+      $('.modal-footer').html(str);
+      $('#myModal').modal();
+      what.val("");
+      what.focus();
+      //return false;
+  }
   </script>
 
 </body>
