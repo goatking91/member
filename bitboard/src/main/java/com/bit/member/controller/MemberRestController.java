@@ -40,12 +40,9 @@ public class MemberRestController {
   }
   @RequestMapping(value = "search", method = RequestMethod.POST)
   public String search(@RequestBody String id) {
-    System.out.println("hi");
-    System.out.println(id);
     MemberDto memberDto = new MemberDto();
     memberDto.setName(id);
     memberDto.setId(id);
-    System.out.println(memberDto.toString());
     String list = memberRestService.searchMember(memberDto);
     return list;
   }
