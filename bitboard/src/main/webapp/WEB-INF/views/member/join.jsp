@@ -120,7 +120,7 @@
               </div>
 							<div class="form-group">
 								<div class="col-lg-10 col-lg-offset-2">
-									<button id="insertBtn" type="button" class="btn btn-primary">확인</button>
+									<<a href="${pageContext.request.contextPath}/index.jsp" button id="insertBtn" type="button" class="btn btn-primary">확인</a></button>
 									<a href="${pageContext.request.contextPath}/index.jsp"
 										class="btn btn-large btn-default">취소</a>
 								</div>
