@@ -283,7 +283,7 @@
 	        type : 'DELETE',
 	        contentType: 'application/json;charset=UTF-8',
 	        success: function(data){
-	          location.href = '${root}/member/list'
+	          location.href = '${root}/logout'
 	        },
 	        error: function(xhr, status, error){
 	          console.log("status: " + status);
