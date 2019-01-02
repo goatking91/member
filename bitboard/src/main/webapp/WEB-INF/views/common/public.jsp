@@ -82,6 +82,12 @@
                 </li>
                 </ul>
             </ul>
+            <sec:authorize access="isAnonymous()">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="${root}/">로그인 </a></li>
+            </ul>
+            </sec:authorize>
+            <sec:authorize access="isAuthenticated()">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="${root}/logout">${user.username}님 로그아웃 </a></li>
                 <li class="dropdown">
@@ -91,6 +97,7 @@
                     </ul>
                 </li>
             </ul>
+            </sec:authorize>
         </div>
     </div>
 </div>
