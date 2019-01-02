@@ -25,6 +25,10 @@
       $("#commonForm").attr("method", "get").attr("action", replypath).submit();
     });
     
+    $("#update").click(function() {
+      $("#commonForm").attr("method", "get").attr("action", modifypath).submit();
+    });
+    
     $(".newpage").click(function() {
         $("#pg").val(1);
         $("#key").val("");
@@ -187,7 +191,7 @@
               <td id="gender" class="text-left">${article.logtime }</td>
 						</tr>
 						<tr>
-							<td style="padding-bottom: 8px; line-height: 1.3" colspan="8"><P>${article.content }</P></td>
+							<td style="padding-bottom: 8px; line-height: 1.3" colspan="8"><p style="padding: 50px">${article.content }</p></td>
 						</tr>
 					</tbody>
 				</table>
@@ -196,14 +200,16 @@
 
 			<div class="pull-right">
 				<!--button class="btn btn-success">수정</button-->
+				<c:if test="${user.username == article.id }">
 				<button id="update" class="btn btn-success btn-default">수정</button>
 				<button id="delete" class="btn btn-success btn-default">삭제</button>
+				</c:if>
 				<%-- 
 				<a
 					href="${pageContext.request.contextPath }/member/delete?id=${info.id}"
 					class="btn btn-large btn-default">삭제</a> 
 				 --%>
-				<a href="./list" class="btn btn-large btn-default">목록</a>
+				<a href="#" class="btn btn-large btn-default mvpage">목록</a>
 			</div>
 
 		</div>
