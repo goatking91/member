@@ -14,6 +14,13 @@ public class MemberDto {
   private String addr;
   private String addr2;
 
+  
+  @Override
+  public String toString() {
+    return "MemberDto [seq=" + seq + ", id=" + id + ", name=" + name + ", email=" + email
+        + ", password=" + password + ", birth=" + birth + ", gender=" + gender + ", phone=" + phone
+        + ", addrcode=" + addrcode + ", addr=" + addr + ", addr2=" + addr2 + "]";
+  }
   public int getSeq() {
     return seq;
   }

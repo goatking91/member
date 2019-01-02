@@ -68,5 +68,10 @@
 		from users
 		where seq = #{seq}
 	</delete>
+	
+	<select id="searchMember" parameterType="memberDto" resultType="memberDto">
+	 select * from member m join users u on m.seq=u.seq 
+	 where m.name like CONCAT('%',#{name},'%') or u.id like CONCAT('%',#{id},'%')  
+	</select>
 
 </mapper>

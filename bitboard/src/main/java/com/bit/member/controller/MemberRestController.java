@@ -38,7 +38,17 @@ public class MemberRestController {
   public void update(@RequestBody MemberDto memberDto) {
     memberRestService.updateMember(memberDto);
   }
-  
+  @RequestMapping(value = "search", method = RequestMethod.POST)
+  public String search(@RequestBody String id) {
+    System.out.println("hi");
+    System.out.println(id);
+    MemberDto memberDto = new MemberDto();
+    memberDto.setName(id);
+    memberDto.setId(id);
+    System.out.println(memberDto.toString());
+    String list = memberRestService.searchMember(memberDto);
+    return list;
+  }
 
   @RequestMapping(value = "idcheck", method = RequestMethod.POST)
   public Map<Object, Object> idcheck(@RequestBody String id) {

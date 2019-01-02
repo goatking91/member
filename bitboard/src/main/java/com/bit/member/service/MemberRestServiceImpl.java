@@ -1,6 +1,7 @@
 package com.bit.member.service;
 
 import java.util.List;
+import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -88,4 +89,20 @@ public class MemberRestServiceImpl implements MemberRestService {
     return count;
   }
 
+  @Override
+  public String searchMember(MemberDto memberDto) {
+    List<MemberDto> list = sqlSession.getMapper(MemberDao.class).searchMember(memberDto);
+    JSONArray array = new JSONArray();
+    for(MemberDto member : list) {
+      JSONObject mem = new JSONObject();
+      mem.put("seq", member.getSeq());
+      mem.put("id", member.getId());
+      mem.put("name", member.getName());
+      mem.put("phone", member.getPhone());
+      mem.put("email", member.getEmail());
+      array.put(mem);
+    }
+    System.out.println(array.toString());
+    return array.toString();
+  }
 }

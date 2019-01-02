@@ -1,6 +1,7 @@
 package com.bit.member.dao;
 
 import java.util.List;
+import java.util.Map;
 import com.bit.member.model.MemberDto;
 
 public interface MemberDao {
@@ -26,5 +27,7 @@ public interface MemberDao {
   void deleteUsers(int seq);
   
   int idcheck(String id);
+
+  List<MemberDto> searchMember(MemberDto memberDto);
   
 }

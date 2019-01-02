@@ -22,6 +22,31 @@
 
               }
             });
+            
+           $('#searchBtn').click(function(){
+             console.log($('#search').val());
+             $.ajax({
+               async: true,
+               type: 'POST',
+               data: $('#search').val(),
+               url: "${pageContext.request.contextPath}/member/search",
+               dataType: "json",
+               contentType: "application/json; charset=UTF-8",
+               success: function(data) {
+                 console.log(data);
+                 $('#member').find('tbody').empty();
+                 var html = "";
+                 $.each(data, function(index, obj) {
+                     html += "<tr><td class='text-center'>" + obj.seq + "</td>";
+                     html += "<td>" + obj.id + "</td>";
+                     html += "<td>" + obj.name + "</td>";
+                     html += "<td>" + obj.phone + "</td>";
+                     html += "<td>" + obj.email + "</td>";
+                 });
+                 $('#member').append(html);
+               }
+           }) 
+           })
           });
 
 </script>
@@ -39,14 +64,14 @@
 
 					<div class="panel panel-default">
 						<div class="panel-body">
-							<form class="form-search">
+							<div class="form-search">
 								<div class="input-group">
-									<input type="text" class="form-control" placeholder="회원명 또는 ID">
+									<input type="text" class="form-control" id="search" placeholder="회원명 또는 ID">
 									<span class="input-group-btn">
-										<button type="submit" class="btn btn-primary">검색</button>
+										<button type="button" id="searchBtn" class="btn btn-primary">검색</button>
 									</span>
 								</div>
-							</form>
+							</div>
 						</div>
 					</div>
 

@@ -1,5 +1,6 @@
 package com.bit.member.service;
 
+import java.util.Map;
 import com.bit.member.model.MemberDto;
 
 public interface MemberRestService {
@@ -15,5 +16,7 @@ public interface MemberRestService {
   void deleteMember(MemberDto memberDto);
   
   int idcheck(String id);
+
+  String searchMember(MemberDto memberDto);
   
 }
