@@ -6,11 +6,16 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
 
   <http auto-config="true" use-expressions="true">
-    <!-- <intercept-url pattern="/login/loginForm.do" access="permitAll" /> 
-    <intercept-url pattern="/home.do" access="permitAll" /> 
-    <intercept-url pattern="/admin/**" access="hasRole('ADMIN')" /> 
-    <intercept-url pattern="/**" access="hasAnyRole('USER, ADMIN')" />--> 
-     <intercept-url pattern="/**" access="permitAll" />
+<!--     <intercept-url pattern="/login/loginForm.do" access="permitAll" />  -->
+<!--     <intercept-url pattern="/home.do" access="permitAll" />  -->
+<!--     <intercept-url pattern="/admin/**" access="hasRole('ADMIN')" />  -->
+     <intercept-url pattern="/" access="permitAll" />
+     <intercept-url pattern="/member/insert" access="permitAll" />
+     <intercept-url pattern="/member/idcheck" access="permitAll" />
+     <intercept-url pattern="/member/**" access="hasRole('USER')" />
+     <intercept-url pattern="/reboard/**" access="hasRole('USER')" />
+     <intercept-url pattern="/album/**" access="hasRole('USER')" />
+     <intercept-url pattern="/bbs/**" access="hasRole('USER')" />
     <form-login login-page="/login" default-target-url="/member/list" 
         authentication-failure-url="/?error" 
         username-parameter="id" password-parameter="password" /> 

@@ -189,6 +189,7 @@
         contentType: 'application/json;charset=UTF-8',
         type: 'POST',
         success: function() {
+          location.href='${root}/member/list'
         }
       });
     });
