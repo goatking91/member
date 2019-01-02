@@ -14,8 +14,7 @@
                 $.each(data, function(index, obj) {
                     html += "<tr><td class='text-center'>" + obj.seq + "</td>";
                     html += "<td>" + obj.id + "</td>";
-                    html += "<td><a href='${root}/member/view?id=" + obj.id
-                            + "'>" + obj.name + "</a></td>";
+                    html += "<td>" + obj.name + "</td>";
                     html += "<td>" + obj.phone + "</td>";
                     html += "<td>" + obj.email + "</td>";
                 });
