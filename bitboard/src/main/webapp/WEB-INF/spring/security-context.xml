@@ -12,10 +12,12 @@
      <intercept-url pattern="/" access="permitAll" />
      <intercept-url pattern="/member/insert" access="permitAll" />
      <intercept-url pattern="/member/idcheck" access="permitAll" />
-     <intercept-url pattern="/member/**" access="hasRole('USER')" />
-     <intercept-url pattern="/reboard/**" access="hasRole('USER')" />
-     <intercept-url pattern="/album/**" access="hasRole('USER')" />
-     <intercept-url pattern="/bbs/**" access="hasRole('USER')" />
+     <intercept-url pattern="/member/postcode/**" access="permitAll" />
+     <intercept-url pattern="/member/rest/**" access="permitAll" />
+     <intercept-url pattern="/member/**" access="hasRole('ROLE_USER')" />
+     <intercept-url pattern="/reboard/**" access="hasRole('ROLE_USER')" />
+     <intercept-url pattern="/album/**" access="hasRole('ROLE_USER')" />
+     <intercept-url pattern="/bbs/**" access="hasRole('ROLE_USER')" />
     <form-login login-page="/login" default-target-url="/member/list" 
         authentication-failure-url="/?error" 
         username-parameter="id" password-parameter="password" /> 
@@ -30,8 +32,8 @@
   <authentication-manager>
     <authentication-provider>
     <jdbc-user-service data-source-ref="ds" role-prefix="" 
-        users-by-username-query="select id, password, enabled from users where id = ?;" 
-        authorities-by-username-query="select a.seq, u.id, a.authority from authorities a join users u on a.seq = u.seq where id = ?;" 
+        users-by-username-query="select id, password, 1 enabled from users where id = ?;" 
+        authorities-by-username-query="select u.id, a.authority from authorities a join users u on a.seq = u.seq where id = ?;" 
         />
     <password-encoder ref="bcryptPasswordEncoder"/>
     </authentication-provider>
