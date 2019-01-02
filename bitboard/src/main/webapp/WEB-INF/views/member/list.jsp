@@ -25,6 +25,9 @@
             
            $('#searchBtn').click(function(){
              console.log($('#search').val());
+             if($('#search').val().trim()==""){
+               location.href='${root}/member/list'
+             }else{
              $.ajax({
                async: true,
                type: 'POST',
@@ -45,7 +48,8 @@
                  });
                  $('#member').append(html);
                }
-           }) 
+           })
+             }
            })
           });
 
